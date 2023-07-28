@@ -1,21 +1,21 @@
 //获取元素
 let nav = $('#nav');
-let menu_button = $('#menu_button');
-let menu = $('#menu');
+let menu_button = $('#menu_button'); // <--菜单按钮
+let menu = $('#menu');  // <--菜单
 let admin_operate = $("#admin_oprate > li"); // <-- 管理菜单大选项
 let admin_operate_list = $("#admin_oprate > ul > li[data-op]"); // <--拿到所有操作项
-let innerpage = $('#inner_page');
+let innerpage = $('#inner_page');  // <--内部页外层
 
 
 //获取选择器
-let inner_postadd = $('.inner_postadd_admin');
+let inner_postadd = $('.inner_postadd_admin');  //管理员文章添加页
 
 //常量定义
 let menu_min_width = 200;
 let menu_button_text_margin_left = 1;
-let left_persent=0.08;
-let innerdiv_width=500;
-let allow_click=true;
+let left_persent=0.08; //居中盒子左边距离百分比
+let innerdiv_width=500; //居中盒子宽度
+let allow_click=true; //切换动画加载锁
 
 //文档准备完毕时事件
 $(document).ready(() => {
