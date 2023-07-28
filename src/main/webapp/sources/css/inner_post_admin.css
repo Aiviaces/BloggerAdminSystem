@@ -1,0 +1,10 @@
+.inner_postadd_admin{
+    background: #6e6e6e;
+    left: 0;
+    width: 1000px;
+    height: 100%;
+    text-align: center;
+    position: absolute;
+    font-size: 30px;
+    font-family: "3270Condensed NFM", 幼圆, system-ui;
+}

@@ -1,0 +1,64 @@
+:root{
+    /*划出后最小宽度*/
+    --min-width:150px;
+    --slide-width:16%;
+    --min-left:var(--slide-width);
+}
+/*根据长度滑入滑出*/
+@keyframes slideout-width {
+    0%{width: 0}
+    100%{
+        width: var(--slide-width);
+        min-width:var(--min-width);
+    }
+}
+@keyframes slidein-width {
+    0%{
+        width: var(--slide-width);
+        min-width:var(--min-width);
+    }
+    100%{
+        width: 0;
+        min-width: 0;
+    }
+}
+
+/*根据左位置偏移滑入滑出*/
+@keyframes slideout-left {
+    0%{
+        left: 0;
+    }
+    100%{
+        left: var(--slide-width);
+    }
+}
+@keyframes slidein-left {
+    0%{
+        left: var(--slide-width);
+    }
+    100%{
+        left: 0;
+    }
+}
+
+/*改变颜色*/
+@keyframes white-transparent {
+    0%{color: white}
+    30%{color: rgba(255, 255, 255, 0)}
+}
+@keyframes transparent-white {
+    50%{color: rgba(255, 255, 255, 0)
+    }
+    100%{color: rgb(255, 255, 255)
+    }
+}
+
+/*数字时钟动画*/
+@keyframes clock-animation {
+    0% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.4;
+    }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.5//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- UserMapper.xml -->
+
+<mapper namespace="com.hrbu.blog.blogadminsystem.Dao.BlogPostDao">
+
+    <!-- 查询所有文章 -->
+    <select id="getAllBlogPost" resultType="com.hrbu.blog.blogadminsystem.Model.BlogPost">
+        select *
+        from blogpost
+    </select>
+
+    <!-- 根据文章编号查询文章 -->
+    <select id="getBlogPostByUid" resultType="com.hrbu.blog.blogadminsystem.Model.BlogPost">
+        select *
+        from blogpost
+        where uid=#{uid};
+    </select>
+
+    <insert id="addBlogPost">
+        insert into blogpost(uid, name, author, content, release_time)
+        values
+        <foreach collection="list" item="post" separator=",">
+            (#{post.uid},#{post.name},#{post.author},#{post.content},now())
+        </foreach>
+    </insert>
+
+</mapper>

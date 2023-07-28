@@ -1,0 +1,8 @@
+获取数据库会话请使用:
+SqlSession session = MyBatisUtil.getSession();
+
+关闭数据库会话请使用:
+MyBatisUtil.closeSession();
+
+工具类每次在线程中放入session,创建时若已存在直接使用,否则创建.
+关闭时若直接关闭seesion.close()会导致再次使用线程中session时已关闭的情况.

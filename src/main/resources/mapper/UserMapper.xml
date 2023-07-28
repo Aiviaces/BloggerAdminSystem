@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.5//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- UserMapper.xml -->
+
+<mapper namespace="com.hrbu.blog.blogadminsystem.Dao.UserDao">
+
+    <!-- 查询所有用户 -->
+    <select id="getAllUser" resultType="com.hrbu.blog.blogadminsystem.Model.User">
+        SELECT *
+        FROM user
+    </select>
+
+    <!-- 根据用户 id 查询用户信息 -->
+    <select id="getUserByUsername" resultType="com.hrbu.blog.blogadminsystem.Model.User">
+        SELECT *
+        FROM user
+        WHERE username = #{username}
+    </select>
+
+    <!-- 插入新的用户信息 -->
+    <insert id="addUser" parameterType="java.util.List">
+        INSERT INTO user (username, password, ugroup, nick)
+        VALUES
+        <foreach collection="list" item="user" separator=",">
+            (#{user.username}, #{user.password}, #{user.ugroup}, #{user.nick})
+        </foreach>
+    </insert>
+
+</mapper>
