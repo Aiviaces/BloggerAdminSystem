@@ -1,0 +1,145 @@
+#inner_user_operate {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    top: 20px;
+    margin-top: 30px;
+    filter: drop-shadow(2px 4px 6px #4b4b4b);
+}
+
+#inner_user_operate > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 80vh;
+    /*border: #4198e0 2px solid;*/
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+#inner_user_operate > div > div:first-child {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    border-top: 6px solid cadetblue;
+    border-left: 4px solid cadetblue;
+    border-right: 4px solid cadetblue;
+    box-sizing: border-box;
+    display: inline-flex;
+}
+
+#inner_user_operate > div table {
+    padding: 0;
+    font-size: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    border-top: 6px solid cadetblue;
+    border-left: 4px solid cadetblue;
+    border-right: 4px solid cadetblue;
+    border-bottom: 6px solid cadetblue;
+}
+
+#inner_user_operate > div > div > table {
+    width: 100%;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 15px 15px 0 0;
+}
+
+#inner_user_operate > div > div > table[data-table='user_add'] {
+    width: 30%;
+    font-size: 20px;
+    height: var(--input-height);
+    background: #ffffff;
+}
+#inner_user_operate > div > div > table[data-table='user_add'] tr:first-child td:first-child {
+    width: 13.5%;
+}
+
+#inner_user_operate > div > div > table[data-table='user_add'] tr:first-child td:last-child {
+    width: 17.8%;
+}
+
+#inner_user_operate > div > table[data-table='user_search'] {
+    /*border: solid olivedrab 2px;*/
+}
+
+#inner_user_operate > div > table[data-table='user_search'] tr:first-child td {
+    height: 20px;
+    width: 20px;
+    background: cadetblue;
+    border: none;
+}
+
+#inner_user_operate > div > table[data-table='user_search'] tr:first-child td:first-child {
+    height: 20px;
+    width: 20px;
+    background: cadetblue;
+}
+
+#inner_user_operate > div > table[data-table='user_search'] tr td:last-child {
+    padding: 2px;
+}
+
+#inner_user_operate > div > table[data-table='user_search'] tr td a {
+    width: 35%;
+    height: var(--input-height);
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#inner_user_operate > div > div > table[data-table='user_add'] tr td {
+    padding: 2px;
+}
+
+#inner_user_operate > div > div > table[data-table='user_add'] tr td input {
+    height: calc(var(--input-height) - 4px);
+}
+
+#inner_user_operate > div > div > table[data-table='user_add'] tr td:last-child a {
+    width: 35%;
+    height: var(--input-height);
+}
+
+#inner_user_operate > div > div > table[data-table='user_add'] tr td select {
+    height: var(--input-height);
+    width: 40%;
+}
+
+#inner_user_operate > div > table[data-table='user_search'] tr td:first-child {
+    height: 30px;
+}
+
+td {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input, button, select {
+    width: 95%;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+#inner_user_operate > div > table tr td {
+    border: 2px solid cadetblue; /* 统一设置边框样式 */
+    vertical-align: middle;
+}
+
+.user_pagination{
+    font-size: 15px;
+    font-weight: bolder;
+    box-sizing: border-box;
+    height: auto;
+    width: auto;
+    border: solid 2px red;
+}
+.user_pagination a{
+    width: auto;
+    height: 20px;
+}

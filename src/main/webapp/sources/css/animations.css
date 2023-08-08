@@ -1,43 +1,50 @@
-:root{
-    /*划出后最小宽度*/
-    --min-width:150px;
-    --slide-width:16%;
-    --min-left:var(--slide-width);
-}
 /*根据长度滑入滑出*/
+/*
+  过程中禁用点击事件
+*/
 @keyframes slideout-width {
-    0%{width: 0}
+    0%{
+        pointer-events: none;
+        width: 0;
+    }
     100%{
         width: var(--slide-width);
         min-width:var(--min-width);
+        pointer-events: auto;
     }
 }
 @keyframes slidein-width {
     0%{
+        pointer-events: none;
         width: var(--slide-width);
         min-width:var(--min-width);
     }
     100%{
         width: 0;
         min-width: 0;
+        pointer-events: none;
     }
 }
 
 /*根据左位置偏移滑入滑出*/
+
 @keyframes slideout-left {
     0%{
         left: 0;
     }
     100%{
         left: var(--slide-width);
+
     }
 }
 @keyframes slidein-left {
     0%{
+        pointer-events: none;
         left: var(--slide-width);
     }
     100%{
         left: 0;
+        pointer-events: auto;
     }
 }
 

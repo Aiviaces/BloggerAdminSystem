@@ -1,10 +1,3 @@
-*{margin: 0;padding: 0}
-
-:root{
-    --nav-height:50px;
-    --list3-hidth:30px;
-}
-
 .head{
     position: relative;
     z-index: 9999;
@@ -17,8 +10,9 @@
     -webkit-user-select: none;
 }
 .nav{
+    margin: 0;padding: 0;
     background: linear-gradient(to right,black 60%, rgba(0, 0, 0, 0.4));
-    width: 100vw;
+    width: 100%;
     height: var(--nav-height);
     display: flex;
     overflow: hidden;
@@ -37,10 +31,11 @@
     transition: width 500ms,color 200ms;
     background-color: #414141;
     color: rgba(255, 255, 255, 0);
-    animation:1s 1;
+    animation:var(--menu-slide-time) 1;
     animation-name: none;
     animation-fill-mode: forwards;
     filter: drop-shadow(2px 2px 3px #252525);
+    pointer-events: none;
 }
 .menu > ul{
     height: auto;
@@ -67,17 +62,15 @@
     color: #ffffff;
 }
 
-.menu > ul > li > ul{
-    list-style-type: none;
-    width: 100%;
-    padding: 0;
-}
-.menu > ul > li > ul > li{
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    text-indent: 5ch;
+.menu > ul > ul > li{
+    font-size: 12px;
     cursor: pointer;
+}
+.menu > ul > ul > li:before{
+    font-size: 22px;
+    font-weight: bolder;
+    content: '>>';
+    margin-right: 1ch;
 }
 li{
     transition: filter 0.3s ease;
@@ -100,19 +93,21 @@ li:active{
 /*菜单管理部分*/
 #admin_oprate > ul{
     list-style-type: circle !important;
-    margin-top: 4px;
+    margin-top: 5px;
     text-indent: 2ch;
+    margin-bottom: 5px;
 }
-#admin_oprate > ul li:before{
-    content: ">>";
-}
+
 #admin_oprate > ul li{
     display: flex;
     align-items: center;
     height: var(--list3-hidth);
-    margin-bottom: 4px;
-    background-color: #181818;
+    margin-bottom: 5px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, #575757 20% , #606060 30%,rgba(255, 255, 255, 0) 100%);
     border-top: outset 2px;
     border-bottom: outset 2px;
-    border-radius: 2px;
+    border-radius: 5px;
+}
+#admin_oprate > ul li:hover{
+    filter: brightness(1.3);
 }

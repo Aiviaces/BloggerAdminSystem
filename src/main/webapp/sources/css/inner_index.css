@@ -1,5 +1,5 @@
 .inner_index {
-    left: 0;
+    left: calc(50vw - 250px);
     width: 500px;
     height: 100%;
     text-align: center;

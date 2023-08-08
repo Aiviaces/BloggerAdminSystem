@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>文章发布</title>
+    <title>文章操作</title>
     <link rel="stylesheet" href="sources/css/vars.css"/>
     <link rel="stylesheet" href="sources/css/inner.css"/>
     <link rel="stylesheet" href="sources/css/animations.css"/>
@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="inner_box">
-    发布文章
+    文章操作
     <div style="background-color: #3f3f3f;color: white">
         爆炸!
     </div>

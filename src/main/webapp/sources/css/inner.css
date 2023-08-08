@@ -1,8 +1,8 @@
-.inner_postadd_admin{
+.inner_box{
     background: #6e6e6e;
     left: 0;
-    width: 1000px;
-    height: 100%;
+    width: var(--innerbox-width);
+    height: 90vh;
     text-align: center;
     position: absolute;
     font-size: 30px;

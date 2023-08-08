@@ -1,14 +1,11 @@
-*{padding: 0;margin: 0}
-:root{
-}
 .inner_page{
     padding: 10px 10px 10px 15px;
     position: absolute;
     left: 0;
     background-color: #ece5e2;
-    width: 100vw;
-    height: 100vh;
-    animation:1s 1;
+    width: 80%;
+    height: 80%;
+    animation:var(--menu-slide-time) 1;
     animation-name: none;
     animation-fill-mode: forwards;
 }

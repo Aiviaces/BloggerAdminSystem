@@ -27,13 +27,20 @@
                 <li data-op="post_operate">
                     文章操作
                 </li>
+                <li data-op="post_review">
+                    文章审核
+                </li>
             </ul>
             <li id="user_admin">用户管理</li>
             <ul>
                 <%-- 前端交给组长(我)搞定,这里data-op作用相当于name,标识操作,方便我js绑定事件 --%>
                 <%-- 你们可以先把表单写好,看得明白代码也可以在里面补充测试觉得ok后,把代码提交给我,我来整合 --%>
-                <li data-op="user_oprate">
+                <li data-op="user_operate">
+                    用户操作
                     <%-- 用户的增删改查都可以放一起,分页查询之后我会修改查询的sql,表单只需记得传页数 --%>
+                </li>
+                <li data-op="permissionGroup_operate">
+                    权限组操作
                 </li>
             </ul>
         </ul>
