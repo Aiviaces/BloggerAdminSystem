@@ -19,7 +19,7 @@ let center_speed = 1000; //居中动画速度
 let current_innerpage;
 
 //页面完全加载完毕时事件
-$(document).ready(() => {
+$(window).on('load', () => {
 
     // 初始触发resize事件，确保页面加载时菜单居中
     $(document).resize();
@@ -64,7 +64,7 @@ $(document).ready(() => {
     loadPage(clickElem, 'post_review', 'test_inner.jsp');
     /* 用户管理 */
     clickElem = $('#user_admin');
-    loadPage(clickElem, 'user_operate', 'admin_user_operate.jsp',()=>loadUserSearchTable());
+    loadPage(clickElem, 'user_operate', 'admin_user_operate.jsp', () => loadUserSearchTable());
     loadPage(clickElem, 'permissionGroup_operate', 'test_inner.jsp');
 
     //对每个li的下一个ul收放
@@ -89,8 +89,7 @@ $(document).ready(() => {
 
 })
 
-
-function loadPage(clickElem, op, pageurl,callback) {
+function loadPage(clickElem, op, pageurl, callback) {
     //clickElem是点击目标jquery对象,op是操作名,pageurl是跳转页url
     let dataop = `[data-op=${op}]`;
     let url = `view/${pageurl}`;
@@ -100,15 +99,29 @@ function loadPage(clickElem, op, pageurl,callback) {
                 if (current_innerpage !== op) {
                     click_lock = false;
                     innerpage.css('opacity', 0);
-                    innerpage.load(url, setTimeout(() => {
-                        center(false);
-                        if (typeof callback == 'function') callback();
-                        current_innerpage = op;
-                        fadeInElem(innerpage);
-                    }, 10));
+                    // 使用 AJAX 请求加载页面内容
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        success: function(data) {
+                            // 将加载的内容插入到 innerpage 中
+                            innerpage.html(data);
+
+                            if (typeof callback == 'function') callback();
+                            current_innerpage = op;
+
+                            // 确保内容加载完毕后执行居中和淡入
+                            // 这里可以添加一些条件判断，确保内容完全加载
+                            center(false);
+                            fadeInElem(innerpage);
+                        },
+                        error: function() {
+                            console.error('Failed to load page.');
+                        }
+                    });
                 }
             }
-        });
+        })
     });
 }
 
@@ -155,7 +168,12 @@ function center(isAnimation = true) {
     let vw = $(window).width(); //窗口宽度
     let leftP = 0.5 * (left_persent * vw);  //菜单栏移动百分比*窗口宽度
 
-    let elem = $('.inner_page'); //外层盒子
+    let elem = $('.inner_page'); // 只选择带有标识类名的元素
+    if (elem.length === 0) {
+        console.log('unfind');
+        return;
+    } // 确保有匹配的元素
+
     let width = parseFloat(elem.find('div').css('width').slice(0, -2)); //内层盒子宽度
     let mid = 0.5 * vw - width / 2; //居中位置
 
@@ -166,6 +184,7 @@ function center(isAnimation = true) {
         elem.find('div').animate({left: mid - leftP}, speed);
     }
 }
+
 
 //获取css的变量
 function getCssRootVarValue(varname, referToWindow = true) {

@@ -32,16 +32,17 @@ public class Test {
         users.add(user1);
         users.add(user3);
 
-        try {
-            System.out.println(userService.addUser(users));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            System.out.println(userService.addUser(users));
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
         List<User> list = null;
         try {
-            list = userService.getAllUser();
+            list = userService.getUsers(0,5);
         } catch (QueryErrorException e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         if (list != null)
             for (User u : list) {

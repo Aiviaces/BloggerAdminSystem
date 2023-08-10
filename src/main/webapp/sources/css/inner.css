@@ -1,5 +1,4 @@
-.inner_box{
-    background: #6e6e6e;
+.inner_box {
     left: 0;
     width: var(--innerbox-width);
     height: 90vh;
@@ -7,4 +6,23 @@
     position: absolute;
     font-size: 30px;
     font-family: "3270Condensed NFM", 幼圆, system-ui;
+    z-index: 99;
+    filter: drop-shadow(0 0 4px #4b4b4b);
+}
+
+.inner_box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(164, 164, 164, 0.35);
+    background-size: 3px 3px; /* 控制颗粒大小 */
+    /*filter: blur(3px); !* 模糊效果 *!*/
+    z-index: -1;
+    border: 10px outset rgba(28, 28, 28, 0.25); /* 设置一个透明的边框 */
+    border-radius: 15px;
+    box-sizing: border-box;
+    filter: drop-shadow(3px 3px 2px rgba(96, 96, 96, 0.49));
 }

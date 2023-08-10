@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface UserDao {
-    List<User> getAllUser();
+    List<User> getUsers(@Param("offset") int offset,@Param("pagesize") int pagesize);
     User getUserByUsername(String username);
+    int getUserNum();
     int addUser(List<User> user);
 }

@@ -5,10 +5,16 @@
 
 <mapper namespace="com.hrbu.blog.blogadminsystem.Dao.UserDao">
 
+    <!-- 查询用户数量 -->
+    <select id="getUserNum" resultType="int">
+        SELECT count(1) FROM user
+    </select>
+
     <!-- 查询所有用户 -->
-    <select id="getAllUser" resultType="com.hrbu.blog.blogadminsystem.Model.User">
+    <select id="getUsers" resultType="com.hrbu.blog.blogadminsystem.Model.User">
         SELECT *
         FROM user
+        LIMIT #{offset},#{pagesize}
     </select>
 
     <!-- 根据用户 id 查询用户信息 -->

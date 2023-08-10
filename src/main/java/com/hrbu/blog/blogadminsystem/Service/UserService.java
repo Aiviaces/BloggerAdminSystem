@@ -15,14 +15,29 @@ import java.util.List;
 
 public class UserService {
 
-    public List<User> getAllUser() throws QueryErrorException {
+    public int getUserNum() throws QueryErrorException {
+        SqlSession session = MyBatisUtil.getSession();
+        int res;
+        try {
+            UserDao userDao = session.getMapper(UserDao.class);
+            res = userDao.getUserNum();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new QueryErrorException("业务层-用户-查询用户数量");
+        } finally {
+            MyBatisUtil.closeSession();
+        }
+        return res;
+    }
+
+    public List<User> getUsers(int offset,int pagesize) throws QueryErrorException {
         SqlSession session = MyBatisUtil.getSession();
         List<User> res;
         try {
             UserDao userDao = session.getMapper(UserDao.class);
-            res = userDao.getAllUser();
+            res = userDao.getUsers(offset,pagesize);
         } catch (Exception e) {
-            session.rollback();
+            e.printStackTrace();
             throw new QueryErrorException("业务层-用户-查询所有用户");
         } finally {
             MyBatisUtil.closeSession();

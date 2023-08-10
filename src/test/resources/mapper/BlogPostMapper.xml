@@ -11,11 +11,18 @@
         from blogpost
     </select>
 
+    <!-- 查询所有待审核文章 -->
+    <select id="getReviewBlogPost" resultType="com.hrbu.blog.blogadminsystem.Model.BlogPost">
+        select *
+        from blogpost
+        where review = 0
+    </select>
+
     <!-- 根据文章编号查询文章 -->
     <select id="getBlogPostByUid" resultType="com.hrbu.blog.blogadminsystem.Model.BlogPost">
         select *
         from blogpost
-        where uid=#{uid};
+        where uid = #{uid};
     </select>
 
     <insert id="addBlogPost">
@@ -25,5 +32,10 @@
             (#{post.uid},#{post.name},#{post.author},#{post.content},now())
         </foreach>
     </insert>
+
+    <update id="updateReviewState">
+        update blogpost set review=1 where uid=
+        <foreach collection="list" item="postname" open="(" close=")" separator=",">#{postname}</foreach>
+    </update>
 
 </mapper>

@@ -22,9 +22,9 @@
 #inner_user_operate > div > div:first-child {
     width: 100%;
     border-radius: 15px 15px 0 0;
-    border-top: 6px solid cadetblue;
-    border-left: 4px solid cadetblue;
-    border-right: 4px solid cadetblue;
+    border-top: 6px solid var(--t-user-bg);
+    border-left: 4px solid var(--t-user-bg);
+    border-right: 4px solid var(--t-user-bg);
     box-sizing: border-box;
     display: inline-flex;
 }
@@ -35,10 +35,10 @@
     width: 100%;
     border-collapse: collapse;
     box-sizing: border-box;
-    border-top: 6px solid cadetblue;
-    border-left: 4px solid cadetblue;
-    border-right: 4px solid cadetblue;
-    border-bottom: 6px solid cadetblue;
+    border-top: 6px solid var(--t-user-bg);
+    border-left: 4px solid var(--t-user-bg);
+    border-right: 4px solid var(--t-user-bg);
+    border-bottom: 6px solid var(--t-user-bg);
 }
 
 #inner_user_operate > div > div > table {
@@ -70,14 +70,14 @@
 #inner_user_operate > div > table[data-table='user_search'] tr:first-child td {
     height: 20px;
     width: 20px;
-    background: cadetblue;
+    background: var(--t-user-bg);
     border: none;
 }
 
 #inner_user_operate > div > table[data-table='user_search'] tr:first-child td:first-child {
     height: 20px;
     width: 20px;
-    background: cadetblue;
+    background: var(--t-user-bg);
 }
 
 #inner_user_operate > div > table[data-table='user_search'] tr td:last-child {
@@ -117,6 +117,13 @@ td {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap; /* 防止内容换行 */
+}
+
+#inner_user_operate > div{
+    overflow: hidden;
+    white-space: nowrap; /* 防止内容换行 */
 }
 
 input, button, select {
@@ -127,7 +134,7 @@ input, button, select {
 }
 
 #inner_user_operate > div > table tr td {
-    border: 2px solid cadetblue; /* 统一设置边框样式 */
+    border: 2px solid var(--t-user-bg); /* 统一设置边框样式 */
     vertical-align: middle;
 }
 

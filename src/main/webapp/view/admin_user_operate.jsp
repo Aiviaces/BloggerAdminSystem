@@ -70,10 +70,10 @@
                 <span onclick="loadUserSearchTable()">查询</span>
             </div>
             <table data-table="user_search">
-                <tr id="user_search_head">
+                <tr>
                     <td>
                         <label>
-                            <input alt="全选" type="checkbox"/>
+                            <input alt="全选" id="selectall" type="checkbox"/>
                         </label>
                     </td>
                     <td>用户名</td>
@@ -84,11 +84,11 @@
                     <td>操作</td>
                 </tr>
             </table>
-            <div class="user_pagination">
-                <a>首页</a>
-                <a>上一页</a>
-                <a>下一页</a>
-                <a>末页</a>
+            <div id="user_pagination" class="user_pagination">
+                <a data-paginate="begin">首页</a>
+                <a data-paginate="last">上一页</a>
+                <a data-paginate="next">下一页</a>
+                <a data-paginate="end">末页</a>
             </div>
         </div>
     </div>
