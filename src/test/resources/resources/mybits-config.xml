@@ -1,0 +1,37 @@
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.5//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybits-config.xml -->
+<configuration>
+
+    <!--  显示配置信息  -->
+    <!--    <settings>-->
+    <!--        &lt;!&ndash; 其他设置 &ndash;&gt;-->
+    <!--        <setting name="logImpl" value="STDOUT_LOGGING" />-->
+    <!--    </settings>-->
+    <environments default="mysql">
+
+        <!-- mysql环境 -->
+        <environment id="mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="com.hrbu.blog.blogadminsystem.Util.C3P0DataSourceFactory">
+                <!-- mysql配置 -->
+                <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/BloggerAdmin"/>
+                <property name="user" value="aiviaces"/>
+                <property name="password" value="011028"/>
+                <!-- c3p0连接池配置 -->
+                <property name="initialPoolSize" value="10"/>
+                <property name="maxPoolSize" value="50"/>
+                <property name="minPoolSize" value="10"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+
+    <mappers>
+        <mapper resource="mapper/BlogPostMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+
+</configuration>
