@@ -1,0 +1,34 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.5//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- PowerMapper.xml -->
+
+<mapper namespace="com.hrbu.blog.blogadminsystem.Dao.PermissionGroupDao">
+
+    <!-- 查询权限组数量 -->
+    <select id="getUserNum" resultType="int">
+        SELECT count(1)
+        FROM t_permission_group
+    </select>
+
+    <!-- 根据权限组名查询其权限 -->
+    <select id="getPermissionGroupByName" resultType="com.hrbu.blog.blogadminsystem.Model.PermissionGroup">
+        select *
+        from t_permission_group
+        where name = #{name}
+    </select>
+    <!-- 获取所有权限组 -->
+    <select id="getAllPermissionGroup" resultType="com.hrbu.blog.blogadminsystem.Model.PermissionGroup">
+        select *
+        from t_permission_group
+    </select>
+    <!-- 插入新的权限 -->
+    <insert id="addPermissionGroup" parameterType="java.util.List">
+        INSERT INTO
+        t_permission_group(uid,name,p_login,p_admin_pgroup_operate,p_index,p_admin_user_operate,p_admin_post_operate,p_admin_post_add,p_admin_post_review)
+        VALUES
+        <foreach collection="list" item="p" separator=",">
+            (#{p.uid},#{p.name},#{p.p_login},#{p.p_admin_pgroup_operate},#{p.p_index},#{p.p_admin_user_operate},#{p.p_admin_post_operate},#{p.p_admin_post_add},#{p.p_admin_post_review})
+        </foreach>
+    </insert>
+</mapper>

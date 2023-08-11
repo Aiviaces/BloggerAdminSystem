@@ -32,6 +32,7 @@
     <mappers>
         <mapper resource="mapper/BlogPostMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/PermissionGroupMapper.xml"/>
     </mappers>
 
 </configuration>

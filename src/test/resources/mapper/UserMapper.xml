@@ -8,20 +8,20 @@
     <!-- 查询所有用户 -->
     <select id="getUsers" resultType="com.hrbu.blog.blogadminsystem.Model.User">
         SELECT *
-        FROM user
+        FROM t_user
         LIMIT #{offset},#{pagesize}
     </select>
 
     <!-- 根据用户 id 查询用户信息 -->
     <select id="getUserByUsername" resultType="com.hrbu.blog.blogadminsystem.Model.User">
         SELECT *
-        FROM user
+        FROM t_user
         WHERE username = #{username}
     </select>
 
     <!-- 插入新的用户信息 -->
     <insert id="addUser" parameterType="java.util.List">
-        INSERT INTO user (username,email, password, pgroup, nick)
+        INSERT INTO t_user (username,email, password, pgroup, nick)
         VALUES
         <foreach collection="list" item="user" separator=",">
             (#{user.username}, #{user.email},#{user.password}, #{user.pgroup}, #{user.nick})
