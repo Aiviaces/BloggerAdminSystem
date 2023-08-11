@@ -11,7 +11,6 @@
     <title>head</title>
     <link rel="stylesheet" href="sources/css/head_left.css"/>
     <script src="sources/javascript/lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
-    <script src="sources/javascript/head_menu_Functions.js" defer="defer"></script>
 </head>
 <body>
 <div id="head" class="head">
@@ -39,7 +38,7 @@
                     用户操作
                     <%-- 用户的增删改查都可以放一起,分页查询之后我会修改查询的sql,表单只需记得传页数 --%>
                 </li>
-                <li data-op="permissionGroup_operate">
+                <li data-op="pgroup_operate">
                     权限组操作
                 </li>
             </ul>

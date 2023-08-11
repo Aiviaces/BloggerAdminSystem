@@ -2,9 +2,18 @@ package com.hrbu.blog.blogadminsystem.Model;
 
 public class User {
     private String username;
+    private String email;
     private String password;
-    private String ugroup;
+    private String pgroup;
     private String nick;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;
@@ -22,12 +31,12 @@ public class User {
         this.password = password;
     }
 
-    public String getUgroup() {
-        return ugroup;
+    public String getPgroup() {
+        return pgroup;
     }
 
-    public void setUgroup(String ugroup) {
-        this.ugroup = ugroup;
+    public void setPgroup(String pgroup) {
+        this.pgroup = pgroup;
     }
 
     public String getNick() {
@@ -43,7 +52,7 @@ public class User {
         return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", ugroup='" + ugroup + '\'' +
+                ", pgroup='" + pgroup + '\'' +
                 ", nick='" + nick + '\'' +
                 '}';
     }

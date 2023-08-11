@@ -18,25 +18,25 @@ public class Test {
         User user3 = new User();
         user3.setUsername("test-rollback-45");
         user3.setPassword("1");
-        user3.setUgroup("1");
+        user3.setPgroup("1");
         user3.setNick("6");
         user2.setUsername("test-rollback-55");
         user2.setPassword("2");
-        user2.setUgroup("2");
+        user2.setPgroup("2");
         user2.setNick("2");
         user1.setUsername("test-rollback-6");
         user1.setPassword("1");
-        user1.setUgroup("1");
+        user1.setPgroup("1");
         user1.setNick("6");
         users.add(user2);
         users.add(user1);
         users.add(user3);
 
-//        try {
-//            System.out.println(userService.addUser(users));
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
+        try {
+            System.out.println(userService.addUser(users));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         List<User> list = null;
         try {
             list = userService.getUsers(0,5);

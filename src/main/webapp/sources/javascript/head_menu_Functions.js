@@ -10,7 +10,6 @@ let index = $('#index'); // <--内部欢迎页
 //获取选择器
 
 //常量定义
-let menu_min_width = 200;
 let menu_button_text_margin_left = 1;
 let left_persent = getCssRootVarValue('slide-width', false); //居中盒子初始左边距离百分比
 let fadeIn_speed = 250; //淡入速度 <- 淡入完毕之前禁止点击切换菜单
@@ -60,12 +59,12 @@ $(window).on('load', () => {
     /* 文章管理 */
     clickElem = $('#post_admin');
     loadPage(clickElem, 'post_add', 'admin_post_add.jsp');
-    loadPage(clickElem, 'post_operate', 'admin_post_operate.jsp');
+    loadPage(clickElem, 'post_operate', 'admin_post_operate.jsp',()=> loadPostSearchTable());
     loadPage(clickElem, 'post_review', 'test_inner.jsp');
     /* 用户管理 */
     clickElem = $('#user_admin');
     loadPage(clickElem, 'user_operate', 'admin_user_operate.jsp', () => loadUserSearchTable());
-    loadPage(clickElem, 'permissionGroup_operate', 'test_inner.jsp');
+    loadPage(clickElem, 'pgroup_operate', 'admin_pgroup_operate.jsp', () => loadPgroupSearchTable());
 
     //对每个li的下一个ul收放
     admin_operate.each(function () {
@@ -109,7 +108,6 @@ function loadPage(clickElem, op, pageurl, callback) {
 
                             if (typeof callback == 'function') callback();
                             current_innerpage = op;
-
                             // 确保内容加载完毕后执行居中和淡入
                             // 这里可以添加一些条件判断，确保内容完全加载
                             center(false);
@@ -193,6 +191,7 @@ function getCssRootVarValue(varname, referToWindow = true) {
     // referToWindow 指是否参考与窗口宽度按百分比返回像素值,为false时返回浮点百分比
     let val = $(':root').css('--' + varname);
     if (val.includes('px')) return parseInt(val.slice(0, -2));
+    else if (val.includes('vh')) return $(window).height()*parseFloat(val.slice(0, -2))/100;
     else if (val.includes('%')) return (parseFloat(val.slice(0, -1)) / 100) * (referToWindow ? $(window).width() : 1);
     else if (val.includes('s')) return parseFloat(val.slice(0, -1)) * 1000;
     else if (val.includes('ms')) return parseInt(val.slice(0, -2));

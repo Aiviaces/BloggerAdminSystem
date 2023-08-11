@@ -25,8 +25,13 @@
         }
     </style>
     <script src="sources/javascript/lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="sources/javascript/head_menu_Functions.js" defer="defer"></script>
     <script src="sources/javascript/InnerPageFunctions.js" async></script>
+    <script src="sources/javascript/CommonFunctions.js" defer></script>
+    <script src="sources/javascript/PostOperateFunctions.js" defer></script>
     <script src="sources/javascript/UserOperateFunctions.js" defer></script>
+    <script src="sources/javascript/PGroupOperateFunctions.js" defer></script>
+
     <link rel="stylesheet" href="sources/css/vars.css"/>
     <link rel="stylesheet" href="sources/css/inner_page.css"/>
     <link rel="stylesheet" href="sources/css/inner_index.css"/>

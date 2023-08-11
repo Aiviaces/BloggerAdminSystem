@@ -21,10 +21,10 @@
 
     <!-- 插入新的用户信息 -->
     <insert id="addUser" parameterType="java.util.List">
-        INSERT INTO user (username, password, ugroup, nick)
+        INSERT INTO user (username,email, password, pgroup, nick)
         VALUES
         <foreach collection="list" item="user" separator=",">
-            (#{user.username}, #{user.password}, #{user.ugroup}, #{user.nick})
+            (#{user.username}, #{user.email},#{user.password}, #{user.pgroup}, #{user.nick})
         </foreach>
     </insert>
 

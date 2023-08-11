@@ -16,6 +16,8 @@ public class UserNumServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        WebResponsUtil.sendTextResponse(response,getServletContext().getAttribute("userNum").toString());
+        String userNum=getServletContext().getAttribute("userNum").toString();
+        System.out.println(userNum);
+        WebResponsUtil.sendTextResponse(response,userNum);
     }
 }

@@ -21,7 +21,6 @@ public class ServletListener implements ServletContextListener {
             ServletContext servletContext=sce.getServletContext();
             int userNum=new UserService().getUserNum();
             servletContext.setAttribute("userNum",userNum);
-            System.out.println(servletContext.getAttribute("userNum"));
         } catch (QueryErrorException e) {
             System.out.println("初始查询用户数目错误 "+e.getMessage());
             e.printStackTrace();

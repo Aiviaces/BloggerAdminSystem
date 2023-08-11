@@ -1,28 +1,27 @@
 /* 固定参数 */
-let max_td_num; //最大单元格行数
 
 /* 全局数组，用于存储被选择的用户名 */
-let selectedUsernames = new Set();
+let selectedPgroupnames = new Set();
 /* 全局数组,保存用户表字段数组 */
-let userDataField = ['username', 'email', 'nick', 'password', 'pgroup'];
+let pgroupDataField = ['username', 'email', 'nick', 'password', 'pgroup'];
 
-function loadUserSearchTable() {
+function loadPgroupSearchTable() {
     $.ajax({
         url: 'UserNumServlet',
         method: 'POST',
         dataType: 'text',
         success: (data) => {
             let data_int = parseInt(data);
-            let target_table=$("#inner_user_operate > div > table[data-table='user_search']");
+            let target_table=$("#inner_pgroup_operate > div > table[data-table='pgroup_search']")
             let init=()=>getInfo(
                 target_table,
                 'UserSearchPaginateServlet',
                 'data-field=username',
-                $('#user_pagination'),
+                $('#pgroup_pagination'),
                 data_int,
                 getAutoPagesize(0.55),
-                userDataField,
-                selectedUsernames,
+                pgroupDataField,
+                selectedPgroupnames,
                 0,
                 false
             );
@@ -30,7 +29,7 @@ function loadUserSearchTable() {
             $(window).resize(()=>init());
         },
         error: (jqXHR) => {
-            console.log("用户数量请求错误:", jqXHR.status, jqXHR.statusText);
+            console.log("用户组数量请求错误:", jqXHR.status, jqXHR.statusText);
         }
     });
 }

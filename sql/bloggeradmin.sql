@@ -19,7 +19,7 @@ create table user
     username varchar(20)        not null comment '用户名 主键 唯一',
     password varchar(20)        not null comment '用户密码
 ',
-    ugroup   smallint default 0 null comment '用户所属用户组 -1管理员 0游客 1用户',
+    pgroup   smallint default 0 null comment '用户所属用户组 -1管理员 0游客 1用户',
     constraint user_username_uindex
         unique (username)
 );
