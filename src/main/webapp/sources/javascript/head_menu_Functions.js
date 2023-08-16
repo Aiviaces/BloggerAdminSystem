@@ -13,13 +13,14 @@ let index = $('#index'); // <--内部欢迎页
 let menu_button_text_margin_left = 1;
 let left_persent = getCssRootVarValue('slide-width', false); //居中盒子初始左边距离百分比
 let fadeIn_speed = 250; //淡入速度 <- 淡入完毕之前禁止点击切换菜单
-let click_lock = true; //切换点击加载锁
 let center_speed = 1000; //居中动画速度
-let current_innerpage;
+let current_innerpage; //当前页面
+let click_lock; //切换点击加载锁
 
 //页面完全加载完毕时事件
 $(window).on('load', () => {
 
+    click_lock = true;
     // 初始触发resize事件，确保页面加载时菜单居中
     $(document).resize();
 
@@ -58,9 +59,9 @@ $(window).on('load', () => {
     let clickElem;
     /* 文章管理 */
     clickElem = $('#post_admin');
-    loadPage(clickElem, 'post_add', 'admin_post_add.jsp');
-    loadPage(clickElem, 'post_operate', 'admin_post_operate.jsp',()=> loadPostSearchTable());
-    loadPage(clickElem, 'post_review', 'test_inner.jsp');
+    loadPage(clickElem, 'post_add', 'admin_post_add.jsp', () => loadPostAddTable());
+    loadPage(clickElem, 'post_operate', 'admin_post_operate.jsp', () => loadPostSearchTable());
+    loadPage(clickElem, 'post_review', 'admin_post_review.jsp', () => loadPostSearchTable());
     /* 用户管理 */
     clickElem = $('#user_admin');
     loadPage(clickElem, 'user_operate', 'admin_user_operate.jsp', () => loadUserSearchTable());
@@ -81,9 +82,12 @@ $(window).on('load', () => {
 
     // 监听窗口变化，并进行节流
     let resizeTimeout;
-    $(window).on('resize', () => {
+    $(window).resize(() => {
+        click_lock = true;
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(center, 200); // 200毫秒的节流间隔
+        resizeTimeout = setTimeout(() => {
+            center();
+        }, 300); // 300毫秒的节流间隔
     });
 
 })
@@ -111,7 +115,6 @@ function loadPage(clickElem, op, pageurl, callback) {
                             // 确保内容加载完毕后执行居中和淡入
                             // 这里可以添加一些条件判断，确保内容完全加载
                             center(false);
-                            fadeInElem(innerpage);
                         },
                         error: function() {
                             console.error('Failed to load page.');
@@ -123,17 +126,19 @@ function loadPage(clickElem, op, pageurl, callback) {
     });
 }
 
-function fadeInElem(elem) {
+function fadeInElem(elem, lock = true, callback) {
     //传参为jquery获取的dom对象
     elem.animate({opacity: 1}, fadeIn_speed, 'swing', () => {
-        click_lock = true;
+        click_lock = lock;
+        if (typeof callback === "function") callback();
     });
 }
 
-function fadeOutElem(elem) {
+function fadeOutElem(elem, lock = true, callback) {
     //传参为jquery获取的dom对象
     elem.animate({opacity: 0}, fadeIn_speed, 'swing', () => {
-        click_lock = true;
+        click_lock = lock;
+        if (typeof callback === "function") callback();
     });
 }
 

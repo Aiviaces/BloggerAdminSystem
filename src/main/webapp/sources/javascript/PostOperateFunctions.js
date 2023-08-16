@@ -6,33 +6,44 @@ let selectedPostnames = new Set();
 let postDataField = ['username', 'email', 'nick', 'password', 'pgroup'];
 
 function loadPostSearchTable() {
-    $.ajax({
-        url: 'UserNumServlet',
-        method: 'POST',
-        dataType: 'text',
-        success: (data) => {
-            let data_int = parseInt(data);
-            let target_table=$("#inner_post_operate > div > table[data-table='post_search']");
-            let init=()=>getInfo(
-                target_table,
-                'UserSearchPaginateServlet',
-                'data-field=username',
-                $('#post_pagination'),
-                data_int,
-                getAutoPagesize(0.9),
-                postDataField,
-                selectedPostnames,
-                0,
-                false
-            );
-            init();
-            $(window).resize(()=>init());
-        },
-        error: (jqXHR) => {
-            console.log("用户组数量请求错误:", jqXHR.status, jqXHR.statusText);
-        }
+    fadeOutElem(innerpage, false, () => {
+        $.ajax({
+            url: 'UserNumServlet',
+            method: 'POST',
+            dataType: 'text',
+            success: (data) => {
+                let data_int = parseInt(data);
+                let target_table = $("#inner_post_operate > div > table[data-table='post_search']");
+                let init = () => {
+                    fadeOutElem(innerpage, false, () => {
+                        getInfo(
+                            target_table,
+                            'UserSearchPaginateServlet',
+                            'data-field=username',
+                            $('#post_pagination'),
+                            data_int,
+                            getAutoPagesize(0.95),
+                            postDataField,
+                            selectedPostnames,
+                            0,
+                            false,
+                            () => fadeInElem(innerpage)
+                        );
+                    });
+                }
+                let resizeTimeout;
+                $(window).resize(() => {
+                    click_lock = true;
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        init();
+                    }, 300); // 300毫秒的节流间隔
+                });
+                init();
+            },
+            error: (jqXHR) => {
+                console.log("用户组数量请求错误:", jqXHR.status, jqXHR.statusText);
+            }
+        });
     });
 }
-
-
-

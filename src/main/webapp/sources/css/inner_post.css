@@ -1,3 +1,4 @@
+#inner_post_add,
 #inner_post_operate {
     display: flex;
     justify-content: center;
@@ -6,6 +7,22 @@
     top: 20px;
     margin-top: 30px;
     filter: drop-shadow(2px 4px 6px #4b4b4b);
+}
+
+#inner_post_add > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: var(--innerbox-div-heidth);
+    border: var(--t-user-bg) 8px solid;
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+#inner_post_add > div > div {
+    width: inherit;
+    height: inherit;
 }
 
 #inner_post_operate > div {
@@ -129,7 +146,13 @@ input, button, select {
     width: auto;
     border: solid 2px red;
 }
-.post_pagination a{
+
+.post_pagination a {
     width: auto;
     height: 20px;
+}
+
+#ckeditor {
+    width: 100%;
+    height: 100%;
 }

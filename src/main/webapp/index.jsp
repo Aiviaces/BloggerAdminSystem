@@ -17,7 +17,8 @@
             overflow: hidden;
             background-color: #ece5e2;
         }
-        body{
+
+        body {
             width: 100vw;
             height: 100vh;
             overflow: hidden;
@@ -25,9 +26,11 @@
         }
     </style>
     <script src="sources/javascript/lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="sources/javascript/lib/ckeditor/ckeditor.js"></script>
     <script src="sources/javascript/head_menu_Functions.js" defer="defer"></script>
     <script src="sources/javascript/InnerPageFunctions.js" async></script>
     <script src="sources/javascript/CommonFunctions.js" defer></script>
+    <script src="sources/javascript/PostAddFunctions.js" defer></script>
     <script src="sources/javascript/PostOperateFunctions.js" defer></script>
     <script src="sources/javascript/UserOperateFunctions.js" defer></script>
     <script src="sources/javascript/PGroupOperateFunctions.js" defer></script>

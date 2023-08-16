@@ -36,7 +36,7 @@ function bindPaginateBox(target_table, target_servlet,target_field, target_pagin
 
         let paginateType = $(this).data('paginate');
         let offset = target_paginatebox.data('offset');
-        console.log(pagesize, num, offset)
+
         // 根据不同分页类型更新 offset 的值
         if (paginateType === 'begin') {
             offset = 0;
@@ -61,7 +61,8 @@ function bindPaginateBox(target_table, target_servlet,target_field, target_pagin
             pagesize,
             datafield_array,
             save_array,
-            offset
+            offset,
+            true
         );
         target_paginatebox.data('offset', offset);
         console.log('页偏移', target_paginatebox.data('offset'));
@@ -88,7 +89,7 @@ function setTableValues(target_table, key_values, datafield_array) {
 
 function initTable(target_table,target_servlet, target_field, target_paginatebox,  num, pagesize, callback, save_array, datafield_array) {
     target_table.find('tr:gt(0)').remove();
-    console.log('num', num)
+
     let addRow = (isNull = false) => {
         let row = $('<tr></tr>');
         /* 复选框,用户名,邮箱,昵称,密码,用户组 */
@@ -104,7 +105,6 @@ function initTable(target_table,target_servlet, target_field, target_paginatebox
         else addRow(true);
     }
     //如果条数小于行数,多的行留空
-    console.log(num,pagesize)
 
     bindCheckBox(target_table, target_field, save_array);
     bindPaginateBox(
@@ -117,7 +117,7 @@ function initTable(target_table,target_servlet, target_field, target_paginatebox
     if (typeof callback == 'function') callback();
 }
 
-function getInfo(target_table,target_servlet,target_field, target_paginatebox, num, pagesize, datafield_array, save_array, offset = 0, inited = true) {
+function getInfo(target_table, target_servlet, target_field, target_paginatebox, num, pagesize, datafield_array, save_array, offset = 0, inited = true, callback) {
     $.ajax({
         url: target_servlet,
         method: 'POST',
@@ -127,7 +127,7 @@ function getInfo(target_table,target_servlet,target_field, target_paginatebox, n
             pagesize: pagesize
         },
         success: (data) => {
-            console.log(data);
+
             if (inited) {
                 setTableValues(target_table, data, datafield_array);
             } else {
@@ -142,6 +142,7 @@ function getInfo(target_table,target_servlet,target_field, target_paginatebox, n
                     save_array,
                     datafield_array
                 );
+                if (typeof callback === "function") callback();
             }
         },
         error: (jqXHR) => {
@@ -153,12 +154,11 @@ function getInfo(target_table,target_servlet,target_field, target_paginatebox, n
 /**
  * 获取自适应单元格的行数
  * @param persent 百分比乘算
+ * @param offset Y轴上的偏移量
  * @returns {number} 返回自适应单元格行数
  */
-function getAutoPagesize(persent=1)
-{
-    let max_td_num=Math.floor(1/(getCssRootVarValue('t-search-row-height') / getCssRootVarValue('innerbox-div-heidth')));
-    let res=Math.floor(max_td_num*persent);
-    console.log(max_td_num,res)
+function getAutoPagesize(persent = 1, offset = 0) {
+    let max_td_num = Math.floor(1 / (getCssRootVarValue('t-search-row-height') / (getCssRootVarValue('innerbox-div-heidth') - offset)));
+    let res = Math.floor(max_td_num * persent);
     return res;
 }
