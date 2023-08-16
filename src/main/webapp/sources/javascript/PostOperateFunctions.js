@@ -22,7 +22,7 @@ function loadPostSearchTable() {
                             'data-field=username',
                             $('#post_pagination'),
                             data_int,
-                            getAutoPagesize(0.95),
+                            getAutoPagesize(0.9),
                             postDataField,
                             selectedPostnames,
                             0,

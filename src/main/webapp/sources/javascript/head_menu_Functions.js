@@ -12,7 +12,7 @@ let index = $('#index'); // <--内部欢迎页
 //常量定义
 let menu_button_text_margin_left = 1;
 let left_persent = getCssRootVarValue('slide-width', false); //居中盒子初始左边距离百分比
-let fadeIn_speed = 250; //淡入速度 <- 淡入完毕之前禁止点击切换菜单
+let fadeIn_speed = 300; //淡入速度 <- 淡入完毕之前禁止点击切换菜单
 let center_speed = 1000; //居中动画速度
 let current_innerpage; //当前页面
 let click_lock; //切换点击加载锁

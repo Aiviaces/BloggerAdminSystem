@@ -11,8 +11,6 @@ function loadPostAddTable() {
 }
 
 function initCkeditor(textarea_id) {
-    let outframe = $(`#${textarea_id}`).parent().closest('div');
-    console.log(outframe.html())
     ckeditor = CKEDITOR.replace(textarea_id, {
         width: 'inherit',
         height: 'inherit'

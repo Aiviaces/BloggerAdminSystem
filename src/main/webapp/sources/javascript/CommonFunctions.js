@@ -1,6 +1,6 @@
 /* 全选功能,选择功能 */
 function bindCheckBox(target_table, target_field, save_array) {
-
+    target_table.off("change");
     // 全选复选框的点击事件委托
     target_table.on("change", "#selectall", function () {
         let isChecked = $(this).prop("checked");
@@ -30,7 +30,7 @@ function bindCheckBox(target_table, target_field, save_array) {
 }
 
 function bindPaginateBox(target_table, target_servlet,target_field, target_paginatebox, pagesize, num, datafield_array, save_array) {
-    let maxpage = Math.floor(num / pagesize);
+    target_paginatebox.off('click');
     target_paginatebox.data('offset', 0);
     target_paginatebox.on('click', 'a', function () {
 
@@ -45,11 +45,10 @@ function bindPaginateBox(target_table, target_servlet,target_field, target_pagin
             offset = Math.max(offset - pagesize, 0);
         } else if (paginateType === 'next') {
             // 计算下一页的 offset
-            offset = Math.min(offset + pagesize, num - pagesize);
-            if (offset < 0) offset = 0;
+            offset = Math.max(0, Math.min(offset + pagesize, num - pagesize));
         } else if (paginateType === 'end') {
             // 计算末页的 offset
-            offset = (maxpage - 1) * pagesize;
+            offset = Math.max(0, num - pagesize);
         }
         // 调用 getUserInfo 函数更新表格内容
         getInfo(
@@ -65,7 +64,7 @@ function bindPaginateBox(target_table, target_servlet,target_field, target_pagin
             true
         );
         target_paginatebox.data('offset', offset);
-        console.log('页偏移', target_paginatebox.data('offset'));
+        console.log('页偏移', offset);
     });
 }
 
@@ -127,7 +126,6 @@ function getInfo(target_table, target_servlet, target_field, target_paginatebox,
             pagesize: pagesize
         },
         success: (data) => {
-
             if (inited) {
                 setTableValues(target_table, data, datafield_array);
             } else {
@@ -159,6 +157,5 @@ function getInfo(target_table, target_servlet, target_field, target_paginatebox,
  */
 function getAutoPagesize(persent = 1, offset = 0) {
     let max_td_num = Math.floor(1 / (getCssRootVarValue('t-search-row-height') / (getCssRootVarValue('innerbox-div-heidth') - offset)));
-    let res = Math.floor(max_td_num * persent);
-    return res;
+    return Math.floor(max_td_num * persent);
 }
