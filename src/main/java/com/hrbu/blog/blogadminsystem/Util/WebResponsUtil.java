@@ -48,7 +48,7 @@ public class WebResponsUtil {
             out.flush();
         } catch (IOException e) {
             // 处理异常
-            throw new RuntimeException("Failed to send JSON response", e);
+            throw new RuntimeException("发送Json格式失败", e);
         }
     }
 

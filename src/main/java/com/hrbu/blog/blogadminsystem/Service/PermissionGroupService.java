@@ -16,21 +16,28 @@ import java.util.List;
 import java.util.Map;
 
 public class PermissionGroupService {
-    /* TODO 权限操作管理
-     *   权限组列表类型为 List<Map<String,Boolean>> permissionGroup;
-     *   包含所有(多个)用户组 每个用户组以 uid 为键 一个 Map 为值
-     *   每个用户组的 Map中保存 name(组名) index_jsp admin_jsp user_jsp ... 每个页面有一个权限
-     *   需要做的事: 先把Dao层中的方法在Service层调用,返回正确的结果
-     *   如何使用Dao层,请看注意事项以及参考我的代码,不懂可以查查网络,或者问我
-     *   目前先把Dao层里对应的功能使用明白吧
-     *   批量操作参数 统一为 List<实体类名> 类型 (封装为列表的操作在servlet做,也就是controller层)
-     * */
+
+    public int getPermissionGroupNum() throws QueryErrorException {
+        SqlSession session = MyBatisUtil.getSession();
+        int res;
+        try {
+            PermissionGroupDao permissionGroupDao = session.getMapper(PermissionGroupDao.class);
+            res = permissionGroupDao.getPermissionNum();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new QueryErrorException("业务层-权限组-查询权限组数量");
+        } finally {
+            MyBatisUtil.closeSession();
+        }
+        return res;
+    }
+
     public PermissionGroup getPermissionGroupByName(String p_ugroup) throws QueryErrorException {
         SqlSession session = MyBatisUtil.getSession();
         PermissionGroup res;
         try {
             PermissionGroupDao permissionGroupDao = session.getMapper(PermissionGroupDao.class);
-            res = permissionGroupDao.getPermissionGroupByName(p_ugroup);
+            res = permissionGroupDao.getPermissionGroupByUid(p_ugroup);
         } catch (Exception e) {
             session.rollback();
             throw new QueryErrorException("业务层-权限-获取权限");
@@ -40,12 +47,12 @@ public class PermissionGroupService {
         return res;
     }
 
-    public List<PermissionGroup> getAllPermissionGroup() throws QueryErrorException {
+    public List<PermissionGroup> getPermissionGroups(int offset, int pagesize) throws QueryErrorException {
         SqlSession session = MyBatisUtil.getSession();
         List<PermissionGroup> res;
         try {
             PermissionGroupDao permissionGroupDao = session.getMapper(PermissionGroupDao.class);
-            res = permissionGroupDao.getAllPermissionGroup();
+            res = permissionGroupDao.getPermissionGroups(offset, pagesize);
         } catch (Exception e) {
             session.rollback();
             throw new QueryErrorException("业务层-权限-获取所有权限");

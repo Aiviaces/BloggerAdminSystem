@@ -11,8 +11,9 @@ function loadPostAddTable() {
 }
 
 function initCkeditor(textarea_id) {
-    ckeditor = CKEDITOR.replace(textarea_id, {
-        width: 'inherit',
-        height: 'inherit'
-    });
+    let cnf = {
+        height: getCssRootVarValue('innerbox-div-heidth')
+    }
+    console.log(cnf)
+    ckeditor = CKEDITOR.replace(textarea_id, cnf);
 }

@@ -6,6 +6,7 @@ import com.hrbu.blog.blogadminsystem.Util.CustomExceptions.PrimaryKeyDuplication
 import com.hrbu.blog.blogadminsystem.Util.CustomExceptions.QueryErrorException;
 import com.hrbu.blog.blogadminsystem.Util.CustomExceptions.WrongSQLException;
 import com.hrbu.blog.blogadminsystem.Util.MyBatisUtil;
+import com.mysql.cj.Session;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
@@ -14,7 +15,6 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class UserService {
-
     public int getUserNum() throws QueryErrorException {
         SqlSession session = MyBatisUtil.getSession();
         int res;

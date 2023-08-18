@@ -4,7 +4,7 @@
 let selectedPostnames = new Set();
 /* 全局数组,保存用户表字段数组 */
 let postDataField = ['username', 'email', 'nick', 'password', 'pgroup'];
-
+let postExcludeField;
 function loadPostSearchTable() {
     fadeOutElem(innerpage, false, () => {
         $.ajax({
@@ -24,9 +24,11 @@ function loadPostSearchTable() {
                             data_int,
                             getAutoPagesize(0.9),
                             postDataField,
+                            postExcludeField,
                             selectedPostnames,
                             0,
                             false,
+                            'span',
                             () => fadeInElem(innerpage)
                         );
                     });

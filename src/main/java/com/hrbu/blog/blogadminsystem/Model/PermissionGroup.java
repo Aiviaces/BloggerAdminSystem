@@ -1,18 +1,27 @@
 package com.hrbu.blog.blogadminsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PermissionGroup {
 
-
+    @JsonProperty("uid")
     private int uid;
+    @JsonProperty("name")
     private String name;
-    private byte fixed;
-    private byte pLogin;
-    private byte pIndex;
-    private byte pAdminPgroupOperate;
-    private byte pAdminUserOperate;
-    private byte pAdminPostOperate;
-    private byte pAdminPostAdd;
-    private byte pAdminPostReview;
+    @JsonProperty("p_login")
+    private byte p_login;
+    @JsonProperty("p_index")
+    private byte p_index;
+    @JsonProperty("p_admin_pgroup_operate")
+    private byte p_admin_pgroup_operate;
+    @JsonProperty("p_admin_user_operate")
+    private byte p_admin_user_operate;
+    @JsonProperty("p_admin_post_operate")
+    private byte p_admin_post_operate;
+    @JsonProperty("p_admin_post_add")
+    private byte p_admin_post_add;
+    @JsonProperty("p_admin_post_review")
+    private byte p_admin_post_review;
 
     /**
      * 权限组id 后台代码生成
@@ -29,59 +38,52 @@ public class PermissionGroup {
     }
 
     /**
-     * 是否为固定权限,固定权限不可修改
-     */
-    private void setFixed(byte fixed) {
-        this.fixed = fixed;
-    }
-
-    /**
      * 登录页权限
      */
     private void setPLogin(byte pLogin) {
-        this.pLogin = pLogin;
+        this.p_login = pLogin;
     }
 
     /**
      * 权限组操作页权限
      */
     private void setPAdminPgroupOperate(byte pAdminPgroupOperate) {
-        this.pAdminPgroupOperate = pAdminPgroupOperate;
+        this.p_admin_pgroup_operate = pAdminPgroupOperate;
     }
 
     /**
      * 主页权限
      */
     private void setPIndex(byte pIndex) {
-        this.pIndex = pIndex;
+        this.p_index = pIndex;
     }
 
     /**
      * 用户操作页权限
      */
     private void setPAdminUserOperate(byte pAdminUserOperate) {
-        this.pAdminUserOperate = pAdminUserOperate;
+        this.p_admin_user_operate = pAdminUserOperate;
     }
 
     /**
      * 文章页操作权限
      */
     private void setPAdminPostOperate(byte pAdminPostOperate) {
-        this.pAdminPostOperate = pAdminPostOperate;
+        this.p_admin_post_operate = pAdminPostOperate;
     }
 
     /**
      * 添加文章页权限
      */
     private void setPAdminPostAdd(byte pAdminPostAdd) {
-        this.pAdminPostAdd = pAdminPostAdd;
+        this.p_admin_post_add = pAdminPostAdd;
     }
 
     /**
      * 审核文章页权限
      */
     private void setPAdminPostReview(byte pAdminPostReview) {
-        this.pAdminPostReview = pAdminPostReview;
+        this.p_admin_post_review = pAdminPostReview;
     }
 
 
@@ -100,59 +102,52 @@ public class PermissionGroup {
     }
 
     /**
-     * 是否为固定权限,固定权限不可修改
-     */
-    private byte getFixed() {
-        return this.fixed;
-    }
-
-    /**
      * 登录页权限
      */
     private byte getPLogin() {
-        return this.pLogin;
+        return this.p_login;
     }
 
     /**
      * 权限组操作页权限
      */
     private byte getPAdminPgroupOperate() {
-        return this.pAdminPgroupOperate;
+        return this.p_admin_pgroup_operate;
     }
 
     /**
      * 主页权限
      */
     private byte getPIndex() {
-        return this.pIndex;
+        return this.p_index;
     }
 
     /**
      * 用户操作页权限
      */
     private byte getPAdminUserOperate() {
-        return this.pAdminUserOperate;
+        return this.p_admin_user_operate;
     }
 
     /**
      * 文章页操作权限
      */
     private byte getPAdminPostOperate() {
-        return this.pAdminPostOperate;
+        return this.p_admin_post_operate;
     }
 
     /**
      * 添加文章页权限
      */
     private byte getPAdminPostAdd() {
-        return this.pAdminPostAdd;
+        return this.p_admin_post_add;
     }
 
     /**
      * 审核文章页权限
      */
     private byte getPAdminPostReview() {
-        return this.pAdminPostReview;
+        return this.p_admin_post_review;
     }
 
     @Override
@@ -160,14 +155,13 @@ public class PermissionGroup {
         return "PermissionGroup{" +
                 "uid=" + uid +
                 ", name='" + name + '\'' +
-                ", fixed=" + fixed +
-                ", pLogin=" + pLogin +
-                ", pIndex=" + pIndex +
-                ", pAdminPgroupOperate=" + pAdminPgroupOperate +
-                ", pAdminUserOperate=" + pAdminUserOperate +
-                ", pAdminPostOperate=" + pAdminPostOperate +
-                ", pAdminPostAdd=" + pAdminPostAdd +
-                ", pAdminPostReview=" + pAdminPostReview +
+                ", pLogin=" + p_login +
+                ", pIndex=" + p_index +
+                ", pAdminPgroupOperate=" + p_admin_pgroup_operate +
+                ", pAdminUserOperate=" + p_admin_user_operate +
+                ", pAdminPostOperate=" + p_admin_post_operate +
+                ", pAdminPostAdd=" + p_admin_post_add +
+                ", pAdminPostReview=" + p_admin_post_review +
                 '}';
     }
 }

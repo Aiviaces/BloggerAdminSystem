@@ -1,9 +1,12 @@
-/* 固定参数 */
-
-/* 全局数组，用于存储被选择的用户名 */
+/**
+ * @param selectedUsernames 全局数组，用于存储被选择的用户名
+ * @param userDataField 全局数组,保存用户表字段数组
+ * @param userExcludeField 如果就置空,加快速度
+ */
 let selectedUsernames = new Set();
-/* 全局数组,保存用户表字段数组 */
 let userDataField = ['username', 'email', 'nick', 'password', 'pgroup'];
+let userExcludeField;
+
 
 function loadUserSearchTable() {
     fadeOutElem(innerpage, false, () => {
@@ -24,9 +27,11 @@ function loadUserSearchTable() {
                             data_int,
                             getAutoPagesize(0.9, 161),
                             userDataField,
+                            userExcludeField,
                             selectedUsernames,
                             0,
                             false,
+                            'span',
                             () => fadeInElem(innerpage)
                         );
                     });

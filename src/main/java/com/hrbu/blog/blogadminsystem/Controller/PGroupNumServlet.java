@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  * 2. 实际查询在监听器中
  * 3. 变更数据数量时,记得更改 ServletContent 中存的 xxxNum 属性
  */
-@WebServlet(name = "UserNumServlet", value = "/UserNumServlet")
-public class UserNumServlet extends HttpServlet {
+@WebServlet(name = "PGroupNumServlet", value = "/PGroupNumServlet")
+public class PGroupNumServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         doPost(request, response);
@@ -21,7 +21,7 @@ public class UserNumServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        String userNum=getServletContext().getAttribute("userNum").toString();
-        WebResponsUtil.sendTextResponse(response,userNum);
+        String pgroupNum = getServletContext().getAttribute("permissionGroupNum").toString();
+        WebResponsUtil.sendTextResponse(response, pgroupNum);
     }
 }

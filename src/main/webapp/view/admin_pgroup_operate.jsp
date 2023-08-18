@@ -76,12 +76,16 @@
                             <input alt="全选" id="selectall" type="checkbox"/>
                         </label>
                     </td>
-                    <td><span>用户名</span></td>
-                    <td><span>邮箱</span></td>
-                    <td><span>昵称</span></td>
-                    <td><span>密码</span></td>
-                    <td><span>用户组</span></td>
-                    <td><span>操作</span></td>
+                    <td><span title="UID">UID</span></td>
+                    <td><span title="权限组名">权限组名</span></td>
+                    <td><span title="登录页">登录页</span></td>
+                    <td><span title="权限组页">权限组页</span></td>
+                    <td><span title="主页">主页</span></td>
+                    <td><span title="用户操作页">用户操作页</span></td>
+                    <td><span title="文章操作页">文章操作页</span></td>
+                    <td><span title="文章添加页">文章添加页</span></td>
+                    <td><span title="文章审核页">文章审核页</span></td>
+                    <td><span title="操作">操作</span></td>
                 </tr>
             </table>
             <div id="pgroup_pagination" class="pgroup_pagination">

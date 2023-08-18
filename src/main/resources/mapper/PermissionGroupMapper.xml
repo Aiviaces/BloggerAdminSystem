@@ -6,21 +6,22 @@
 <mapper namespace="com.hrbu.blog.blogadminsystem.Dao.PermissionGroupDao">
 
     <!-- 查询权限组数量 -->
-    <select id="getUserNum" resultType="int">
+    <select id="getPermissionNum" resultType="int">
         SELECT count(1)
         FROM t_permission_group
     </select>
 
     <!-- 根据权限组名查询其权限 -->
-    <select id="getPermissionGroupByName" resultType="com.hrbu.blog.blogadminsystem.Model.PermissionGroup">
+    <select id="getPermissionGroupByUid" resultType="com.hrbu.blog.blogadminsystem.Model.PermissionGroup">
         select *
         from t_permission_group
-        where name = #{name}
+        where name = #{uid}
     </select>
-    <!-- 获取所有权限组 -->
-    <select id="getAllPermissionGroup" resultType="com.hrbu.blog.blogadminsystem.Model.PermissionGroup">
+    <!-- 获取分页的权限组 -->
+    <select id="getPermissionGroups" resultType="com.hrbu.blog.blogadminsystem.Model.PermissionGroup">
         select *
         from t_permission_group
+        LIMIT #{offset},#{pagesize}
     </select>
     <!-- 插入新的权限 -->
     <insert id="addPermissionGroup" parameterType="java.util.List">

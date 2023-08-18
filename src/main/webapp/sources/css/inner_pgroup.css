@@ -31,7 +31,7 @@
 
 #inner_pgroup_operate > div table {
     padding: 0;
-    font-size: 20px;
+    font-size: 15px;
     width: 100%;
     border-collapse: collapse;
     box-sizing: border-box;
@@ -82,18 +82,20 @@
     width: 100px;
     min-width: 100px;
 }
+
 /*单元格内内容*/
-#inner_pgroup_operate > div > table[data-table='pgroup_search'] tr td span{
+#inner_pgroup_operate > div > table[data-table='pgroup_search'] tr td span {
     display: inline-block;
-    min-width: 10vw;
-    max-width: 10vw; /* 保证在超出情况下也能省略 */
+    min-width: 5vw;
+    max-width: 5vw; /* 保证在超出情况下也能省略 */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#inner_pgroup_operate > div > table[data-table='pgroup_search'] tr td:nth-child(3) span{
-    min-width: 15vw;
-    max-width: 15vw;
+
+#inner_pgroup_operate > div > table[data-table='pgroup_search'] tr td:nth-child(3) span {
+    min-width: 8vw;
+    max-width: 8vw;
 }
 
 #inner_pgroup_operate > div > table[data-table='pgroup_search'] tr td a {
@@ -152,7 +154,7 @@ input, button, select {
     /*border-left: none;*/
 }
 
-.pgroup_pagination{
+.pgroup_pagination {
     font-size: 15px;
     font-weight: bolder;
     box-sizing: border-box;
@@ -160,7 +162,15 @@ input, button, select {
     width: auto;
     border: solid 2px red;
 }
-.pgroup_pagination a{
+
+.pgroup_pagination a {
     width: auto;
     height: 20px;
+}
+
+/* 自定义禁用状态的复选框样式 */
+.disabled-checkbox {
+    opacity: 0.4; /* 设置透明度，使禁用状态的复选框变暗 */
+    pointer-events: none; /* 设置光标样式为不可点击 */
+    /* 可以添加其他样式，如改变背景色、边框样式等 */
 }

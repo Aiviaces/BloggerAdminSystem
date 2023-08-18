@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>权限组操作</title>
     <link rel="stylesheet" href="sources/css/vars.css"/>
     <link rel="stylesheet" href="sources/css/inner.css"/>
@@ -21,7 +22,7 @@
         <div>
             <div>
                 <label>
-                    <textarea class="ckeditor" id="ckeditor" name="content"></textarea>
+                    <textarea title="" class="ckeditor" id="ckeditor" name="content"></textarea>
                 </label>
             </div>
         </div>
