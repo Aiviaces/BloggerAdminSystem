@@ -20,6 +20,10 @@
     animation: clock-animation 2.5s infinite alternate-reverse;
 }
 
-#clock-number{
+.clock[data-page='login'] {
+    font-size: 20px;
+}
+
+#clock-number {
     text-align: center;
 }

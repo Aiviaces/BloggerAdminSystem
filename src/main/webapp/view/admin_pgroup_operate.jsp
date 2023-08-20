@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="sources/css/animations.css"/>
     <link rel="stylesheet" href="sources/css/inner_pgroup.css"/>
     <script src="sources/javascript/lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="sources/javascript/PGroupOperateFunctions.js" defer></script>
 </head>
 <body>
 <div class="inner_box">
