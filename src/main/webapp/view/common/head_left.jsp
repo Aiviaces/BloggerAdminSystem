@@ -17,8 +17,13 @@
     <div id="menu" class="menu">
         <ul id="admin_oprate">
             <%--每一个li接一个ul才能收放,否则点了没用--%>
-            <li id="index">管理主页</li>
-            <li id="post_admin">文章管理</li>
+            <li id="login_state" data-login-state="login-in">
+                <%-- 登录状态 --%>
+                <span>登录</span>
+                <span></span>
+            </li>
+            <li id="index"><span>管理主页</span></li>
+            <li id="post_admin"><span>文章管理</span></li>
             <ul>
                 <li data-op="post_add">
                     文章发布

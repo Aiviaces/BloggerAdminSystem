@@ -6,6 +6,7 @@ let admin_operate = $("#admin_oprate > li"); // <-- 管理菜单大选项
 let admin_operate_list = $("#admin_oprate > ul > li[data-op]"); // <--拿到所有操作项
 let innerpage = $('#inner_page');  // <--内部页外层
 let index = $('#index'); // <--内部欢迎页
+let loginstate = $('#login_state'); // <--登录选项
 
 //获取选择器
 
@@ -17,6 +18,8 @@ let center_speed = 1000; //居中动画速度
 let current_innerpage; //当前页面
 let click_lock; //切换点击加载锁
 
+let userdata; //当前用户数据
+
 //页面完全加载完毕时事件
 $(window).on('load', () => {
 
@@ -25,13 +28,16 @@ $(window).on('load', () => {
     $(document).resize();
 
     //初始加载欢迎页
-    index.click(() => {
+    index.click(function () {
         if (click_lock) {
             if (current_innerpage !== 'index') {
                 click_lock = false;
                 innerpage.css('opacity', 0)
                 innerpage.load('view/welcome_admin.jsp', () => {
                     current_innerpage = 'index';
+                    if (userdata != null) {
+                        $('.inner_index span:first-child').text(`欢迎使用本系统,${userdata['nick']}`);
+                    }
                     fadeInElem(innerpage);
                     center(false);
                 });
@@ -39,6 +45,45 @@ $(window).on('load', () => {
         }
     })
     index.click();
+
+    //初始发送登录请求
+    let loginspan = loginstate.find('span').eq(0);
+    //发送请求拿到登录状态
+    $.ajax({
+        url: 'UserLoginCheckServlet',
+        method: 'POST',
+        dataType: 'json',
+        success: (data) => {
+            console.log(data);
+            userdata = data;
+            if (userdata === null) {
+                loginOutDeal();
+                loginstate.data('login-state', 'login-in');
+            } else if (userdata.username !== undefined) {
+                loginInDeal(loginspan);
+                loginstate.data('login-state', 'login-out');
+            }
+        },
+        error: (jqXHR) => {
+            console.log("登录请求错误:", jqXHR.status, jqXHR.statusText);
+        }
+    })
+    loginstate.click(function () {
+        if (loginstate.data('login-state') === 'login-out') {
+            $.ajax({
+                url: 'LoginOutServlet',
+                method: 'POST',
+                success: () => {
+                    loginOutDeal();
+                },
+                error: (jqXHR) => {
+                    console.log("登出请求错误:", jqXHR.status, jqXHR.statusText);
+                }
+            });
+        }
+    })
+    loginspan.click();
+
 
     /*innerpage.css('opacity', 0)
     innerpage.load('view/welcome_admin.jsp', () => fadeInElem(innerpage));*/
@@ -92,6 +137,40 @@ $(window).on('load', () => {
 
 })
 
+function loginInDeal() {
+    let span = loginstate.find('span').eq(0)
+    loginstate.data('login-state', 'login-out');
+    span.text('登出');
+    let headimg = span.next('span');
+    headimg.show();
+    headimg.animate({opacity: 1}, 300, "swing");
+    current_innerpage = 'login-out';
+    index.click();
+}
+
+function loginOutDeal() {
+    let span = loginstate.find('span').eq(0)
+    loginstate.data('login-state', 'login-in');
+    span.text('登录');
+    let headimg = span.next('span');
+    headimg.animate({opacity: 0}, 300, "swing", () => headimg.hide());
+    current_innerpage = 'login-in';
+    index.click();
+}
+
+function login() {
+    $.ajax({
+        url: 'UserLoginServlet',
+        data: {},
+        success: () => {
+            loginInDeal(loginstate.find('span').eq(0));
+        },
+        error: (jqXHR) => {
+            console.log("登录状态请求错误:", jqXHR.status, jqXHR.statusText);
+        }
+    })
+}
+
 function loadPage(clickElem, op, pageurl, callback) {
     //clickElem是点击目标jquery对象,op是操作名,pageurl是跳转页url
     let dataop = `[data-op=${op}]`;
@@ -106,7 +185,7 @@ function loadPage(clickElem, op, pageurl, callback) {
                     $.ajax({
                         url: url,
                         method: 'POST',
-                        success: function(data) {
+                        success: function (data) {
                             // 将加载的内容插入到 innerpage 中
                             innerpage.html(data);
 
@@ -116,7 +195,7 @@ function loadPage(clickElem, op, pageurl, callback) {
                             // 这里可以添加一些条件判断，确保内容完全加载
                             center(false);
                         },
-                        error: function() {
+                        error: function () {
                             console.error('Failed to load page.');
                         }
                     });
@@ -196,7 +275,7 @@ function getCssRootVarValue(varname, referToWindow = true) {
     // referToWindow 指是否参考与窗口宽度按百分比返回像素值,为false时返回浮点百分比
     let val = $(':root').css('--' + varname);
     if (val.includes('px')) return parseInt(val.slice(0, -2));
-    else if (val.includes('vh')) return $(window).height()*parseFloat(val.slice(0, -2))/100;
+    else if (val.includes('vh')) return $(window).height() * parseFloat(val.slice(0, -2)) / 100;
     else if (val.includes('%')) return (parseFloat(val.slice(0, -1)) / 100) * (referToWindow ? $(window).width() : 1);
     else if (val.includes('s')) return parseFloat(val.slice(0, -1)) * 1000;
     else if (val.includes('ms')) return parseInt(val.slice(0, -2));

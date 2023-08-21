@@ -43,8 +43,29 @@ public class WebResponsUtil {
     public static void sendJsonArrayResponse(HttpServletResponse response, List<?> list) {
         setResponseContentType(response, "application/json");
         try {
-            Writer out=response.getWriter();
+            Writer out = response.getWriter();
             out.write(objectMapper.writeValueAsString(list));
+            out.flush();
+        } catch (IOException e) {
+            // 处理异常
+            throw new RuntimeException("发送Json格式失败", e);
+        }
+    }
+
+    /**
+     * 发送json响应
+     *
+     * @param response 响应
+     * @param obj      发送对象
+     */
+    public static void sendJsonResponse(HttpServletResponse response, Object obj) {
+        setResponseContentType(response, "application/json");
+        try {
+            if (response.isCommitted()) {
+                throw new IllegalStateException("响应已经提交，无法发送Json格式数据");
+            }
+            Writer out = response.getWriter();
+            out.write(objectMapper.writeValueAsString(obj));
             out.flush();
         } catch (IOException e) {
             // 处理异常

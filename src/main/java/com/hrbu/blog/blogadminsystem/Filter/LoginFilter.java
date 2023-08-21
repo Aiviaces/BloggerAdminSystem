@@ -1,5 +1,7 @@
 package com.hrbu.blog.blogadminsystem.Filter;
 
+import com.hrbu.blog.blogadminsystem.Model.User;
+import com.hrbu.blog.blogadminsystem.Util.WebRequestUtil;
 import com.hrbu.blog.blogadminsystem.Util.Wrapper.UrlRewriterRequestWrapper;
 
 import javax.servlet.*;
@@ -22,8 +24,12 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = ((HttpServletRequest) request);
         String url = new String(req.getRequestURL());
         if (!url.contains("/login.jsp")) {
-            HttpServletRequestWrapper wrapper = new UrlRewriterRequestWrapper(req, "/view/login.jsp");
-            chain.doFilter(wrapper, response);
+            User user = (User) WebRequestUtil.getRequestSessionAttr(req, "user");
+            System.out.println(user);
+            if (user == null) {
+                HttpServletRequestWrapper wrapper = new UrlRewriterRequestWrapper(req, "/view/login.jsp");
+                chain.doFilter(wrapper, response);
+            } else chain.doFilter(request, response);
         } else chain.doFilter(request, response);
     }
 }
