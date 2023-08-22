@@ -13,22 +13,33 @@
     <link rel="stylesheet" href="sources/css/inner_index.css"/>
     <link rel="stylesheet" href="sources/css/animations.css"/>
     <script src="sources/javascript/lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="sources/javascript/UserLoginFunctions.js" defer></script>
 </head>
 <body>
 <div class="inner_index">
-    登录
-    <div style="background-color: #252525;">
-        <div class="clock" data-page="login">
-            <p id="clock-number"></p>
-        </div>
-        <div id="loginbox" style="width: 200px;margin: 0 auto">
-            <label>
-                <input type="text"/>
-            </label>
-            <label>
-                <input type="text"/>
-            </label>
-            <label>
+    <span>博客管理系统</span>
+    <div>
+        <div id="loginbox">
+            <div class="clock" data-page="login">
+                <p id="clock-number"></p>
+            </div>
+            <div>
+                <label>
+                    <input data-field="username" type="text" placeholder="用户名"/>
+                </label>
+                <label>
+                    <input data-field="password" type="text" placeholder="密码"/>
+                </label>
+                <label>
+                    <input data-field="captcha" type="password" placeholder="验证码"/>
+                </label>
+                <div id="captcha">
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+            <label id="loginbtn">
                 <a onclick="login()" style="color: white">登录</a>
             </label>
         </div>

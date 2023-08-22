@@ -9,7 +9,24 @@
     font-family: "3270Condensed NFM", 幼圆, system-ui;
 }
 
+.inner_index > div {
+    background-color: #252525;
+    border-radius: 10px;
+    filter: drop-shadow(3px 6px 3px grey);
+    backdrop-filter: none;
+}
+
+.inner_index span:first-child {
+    flex-direction: column;
+    display: flex;
+    margin-bottom: 20px;
+}
+
 .clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
     width: 400px;
     height: 100px;
     margin: 20px auto 0;
@@ -21,9 +38,76 @@
 }
 
 .clock[data-page='login'] {
+    box-sizing: border-box;
     font-size: 20px;
+    height: 20px;
+    width: 100%;
+}
+
+.clock + div {
+    margin-top: 5px;
 }
 
 #clock-number {
+    line-height: 100%;
+}
+
+#loginbox {
+    box-sizing: border-box;
+    border: transparent solid 2px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+#loginbox label {
+    width: 100%;
+}
+
+#loginbox input {
     text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    transition: filter 0.3s ease;
+    background: white;
+}
+
+#loginbox input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 100px white inset;
+    box-shadow: 0 0 0 100px white inset;
+}
+
+#loginbox input:hover,
+#loginbox input:focus {
+    background: white;
+    transition: filter 0.3s ease;
+    filter: drop-shadow(0 0 3px white);
+}
+
+#loginbtn {
+    line-height: 200%;
+}
+
+#captcha {
+    display: flex;
+    flex-direction: column;
+    margin: 5px auto 0;
+    width: 100%;
+    height: 30px;
+}
+
+#captcha div:first-child {
+    width: 196px;
+    height: 30px;
+    border-radius: 7px;
+    background: white;
+    overflow: hidden;
+}
+
+#captcha div:first-child img:first-child {
+    width: 100%;
+    height: 100%;
 }

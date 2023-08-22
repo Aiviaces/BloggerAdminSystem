@@ -1,9 +1,14 @@
 package com.hrbu.blog.blogadminsystem.Util;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -105,16 +110,40 @@ public class WebResponsUtil {
      *
      * @param response HttpServletResponse 对象
      * @param image    图片输入流
-     * @param mimeType 图片 MIME 类型
+     * @param imgType  图片 MIME 类型
      */
-    public static void sendImageResponse(HttpServletResponse response, InputStream image, String mimeType) {
-        setResponseContentType(response, mimeType);
+    public static void sendImageResponse(HttpServletResponse response, InputStream image, String imgType) {
+        setResponseContentType(response, "image/" + imgType);
         try {
             byte[] buffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = image.read(buffer)) != -1) {
                 response.getOutputStream().write(buffer, 0, bytesRead);
             }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to send image response", e);
+        }
+    }
+
+    /**
+     * 发送图像响应
+     *
+     * @param response 响应
+     * @param image    图像
+     * @param imgType  mime类型
+     *                 响应内容为base64图片URL
+     */
+    public static void sendImageResponse(HttpServletResponse response, BufferedImage image, String imgType) {
+        setResponseContentType(response, "image/" + imgType);
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, imgType, baos);
+            byte[] imageData = baos.toByteArray();
+            String base64Image = "data:image/" + imgType + ";base64," + Base64.getEncoder().encodeToString(imageData);
+            byte[] responseBytes = base64Image.getBytes(StandardCharsets.UTF_8);
+            response.setContentLength(responseBytes.length);
+            response.getOutputStream().write(responseBytes);
+            response.flushBuffer();
         } catch (IOException e) {
             throw new RuntimeException("Failed to send image response", e);
         }

@@ -158,19 +158,6 @@ function loginOutDeal() {
     index.click();
 }
 
-function login() {
-    $.ajax({
-        url: 'UserLoginServlet',
-        data: {},
-        success: () => {
-            loginInDeal(loginstate.find('span').eq(0));
-        },
-        error: (jqXHR) => {
-            console.log("登录状态请求错误:", jqXHR.status, jqXHR.statusText);
-        }
-    })
-}
-
 function loadPage(clickElem, op, pageurl, callback) {
     //clickElem是点击目标jquery对象,op是操作名,pageurl是跳转页url
     let dataop = `[data-op=${op}]`;

@@ -11,5 +11,9 @@ function updateClock() {
 
     $("#clock-number").text(hours + ":" + minutes + ":" + seconds);
 }
-$(document).ready(updateClock);
-setInterval(updateClock, 1000);
+
+$(document).ready(() => {
+    updateClock();
+    setInterval(updateClock, 1000);
+});
+
