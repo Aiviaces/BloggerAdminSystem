@@ -7,11 +7,12 @@
 --%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
-<html>
+<html lang="ch">
 <head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>用户管理系统</title>
     <style>
-        #outframe{
+        #outframe {
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -27,8 +28,8 @@
     </style>
     <script src="sources/javascript/lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
     <script src="sources/javascript/lib/ckeditor/ckeditor.js"></script>
+
     <script src="sources/javascript/head_menu_Functions.js" defer="defer"></script>
-    <script src="sources/javascript/InnerIndexFunctions.js" async></script>
     <script src="sources/javascript/CommonFunctions.js" defer></script>
     <script src="sources/javascript/PostAddFunctions.js" defer></script>
     <script src="sources/javascript/PostOperateFunctions.js" defer></script>

@@ -40,15 +40,30 @@ public class WebRequestUtil {
         }
     }
 
-    public static void setRequestSessionAttr(HttpServletRequest req, String key, Object value) {
-        if (isNullOrEmpty(key) || value == null) {
+    /**
+     * 设置请求会话attr
+     * <p>
+     * 目前已记录属性:
+     * 1. user 用户对象
+     * 2. user-pgroup-map 用户权限组map对象
+     * 3. msg 返回前台的消息
+     * 4. userNum 用户数量
+     * 5. permissionGroupNum 用户组数量
+     *
+     * @param req        请求
+     * @param key        键
+     * @param value      值
+     * @param allow_null 允许为空
+     */
+    public static void setRequestSessionAttr(HttpServletRequest req, String key, Object value, boolean allow_null) {
+        if (!allow_null && (isNullOrEmpty(key) || value == null)) {
             throw new RuntimeException("设置会话属性失败-会话属性键值对有空内容");
         }
         req.getSession().setAttribute(key, value);
     }
 
-    public static Object getRequestSessionAttr(HttpServletRequest req, String key) {
-        if (isNullOrEmpty(key)) {
+    public static Object getRequestSessionAttr(HttpServletRequest req, String key, boolean allow_null) {
+        if (!allow_null && isNullOrEmpty(key)) {
             throw new RuntimeException("获取会话属性失败-会话属性是键为空");
         }
         return req.getSession().getAttribute(key);

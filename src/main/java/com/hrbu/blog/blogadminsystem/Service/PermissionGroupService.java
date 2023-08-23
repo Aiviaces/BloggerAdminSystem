@@ -32,12 +32,12 @@ public class PermissionGroupService {
         return res;
     }
 
-    public PermissionGroup getPermissionGroupByName(String p_ugroup) throws QueryErrorException {
+    public PermissionGroup getPermissionGroupByUid(String uid) throws QueryErrorException {
         SqlSession session = MyBatisUtil.getSession();
         PermissionGroup res;
         try {
             PermissionGroupDao permissionGroupDao = session.getMapper(PermissionGroupDao.class);
-            res = permissionGroupDao.getPermissionGroupByUid(p_ugroup);
+            res = permissionGroupDao.getPermissionGroupByUid(uid);
         } catch (Exception e) {
             session.rollback();
             throw new QueryErrorException("业务层-权限-获取权限");

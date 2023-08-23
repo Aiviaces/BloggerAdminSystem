@@ -1,5 +1,6 @@
 //欢迎页时钟
-function updateClock() {
+function updateClock(cn) {
+
     const currentTime = new Date();
     let hours = currentTime.getHours();
     let minutes = currentTime.getMinutes();
@@ -9,11 +10,15 @@ function updateClock() {
     minutes = (minutes < 10 ? "0" : "") + minutes;
     seconds = (seconds < 10 ? "0" : "") + seconds;
 
-    $("#clock-number").text(hours + ":" + minutes + ":" + seconds);
+    cn.text(hours + ":" + minutes + ":" + seconds);
+
 }
 
 $(document).ready(() => {
-    updateClock();
-    setInterval(updateClock, 1000);
+    let cn = $("#clock-number");
+    cn.css({opacity: 0});
+    updateClock(cn);
+    cn.animate({opacity: 1}, 300);
+    setInterval(() => updateClock(cn), 1000);
 });
 

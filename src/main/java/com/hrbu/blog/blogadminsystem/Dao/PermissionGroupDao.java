@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 public interface PermissionGroupDao {
+
     int getPermissionNum();
 
     int addPermissionGroup(List<Map<String, Boolean>> newgroup);
 
-    PermissionGroup getPermissionGroupByUid(String uid);
+    PermissionGroup getPermissionGroupByUid(@Param("uid") String uid);
 
     List<PermissionGroup> getPermissionGroups(@Param("offset") int offset, @Param("pagesize") int pagesize);
 

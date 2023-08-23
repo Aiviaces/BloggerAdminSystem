@@ -2,12 +2,12 @@
     position: relative;
     z-index: 9999;
     display: flex;
-    font-family: "3270Condensed NFM", 等线 , system-ui;
+    font-family: "3270Condensed NFM", 等线, system-ui;
     color: white;
-    user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 .nav{
     margin: 0;padding: 0;

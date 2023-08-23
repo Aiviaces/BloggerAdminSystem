@@ -10,9 +10,8 @@
 <head>
     <title>欢迎页</title>
     <link rel="stylesheet" href="sources/css/vars.css"/>
-<%--    <link rel="stylesheet" href="sources/css/inner_index.css"/>--%>
-<%--    <link rel="stylesheet" href="sources/css/animations.css"/>--%>
     <script src="sources/javascript/lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="sources/javascript/InnerIndexFunctions.js" defer></script>
 </head>
 <body>
 <div class="inner_index">

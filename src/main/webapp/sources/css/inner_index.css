@@ -13,7 +13,6 @@
     background-color: #252525;
     border-radius: 10px;
     filter: drop-shadow(3px 6px 3px grey);
-    backdrop-filter: none;
 }
 
 .inner_index span:first-child {
@@ -88,6 +87,7 @@
 }
 
 #loginbtn {
+    color: white;
     line-height: 200%;
 }
 

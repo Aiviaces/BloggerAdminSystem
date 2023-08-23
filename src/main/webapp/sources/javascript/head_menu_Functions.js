@@ -27,6 +27,9 @@ $(window).on('load', () => {
     // 初始触发resize事件，确保页面加载时菜单居中
     $(document).resize();
 
+    //初始发送登录请求
+    getLoginState();
+
     //初始加载欢迎页
     index.click(function () {
         if (click_lock) {
@@ -36,38 +39,16 @@ $(window).on('load', () => {
                 innerpage.load('view/welcome_admin.jsp', () => {
                     current_innerpage = 'index';
                     if (userdata != null) {
-                        $('.inner_index span:first-child').text(`欢迎使用本系统,${userdata['nick']}`);
+                        $('.inner_index span:first-child').text(`欢迎使用本系统${',' + userdata['nick']}`);
                     }
                     fadeInElem(innerpage);
                     center(false);
                 });
             }
         }
-    })
-    index.click();
+    });
 
-    //初始发送登录请求
-    let loginspan = loginstate.find('span').eq(0);
-    //发送请求拿到登录状态
-    $.ajax({
-        url: 'UserLoginCheckServlet',
-        method: 'POST',
-        dataType: 'json',
-        success: (data) => {
-            console.log(data);
-            userdata = data;
-            if (userdata === null) {
-                loginOutDeal();
-                loginstate.data('login-state', 'login-in');
-            } else if (userdata.username !== undefined) {
-                loginInDeal(loginspan);
-                loginstate.data('login-state', 'login-out');
-            }
-        },
-        error: (jqXHR) => {
-            console.log("登录请求错误:", jqXHR.status, jqXHR.statusText);
-        }
-    })
+    //绑定登录(登出)功能
     loginstate.click(function () {
         if (loginstate.data('login-state') === 'login-out') {
             $.ajax({
@@ -82,7 +63,6 @@ $(window).on('load', () => {
             });
         }
     })
-    loginspan.click();
 
 
     /*innerpage.css('opacity', 0)
@@ -137,6 +117,29 @@ $(window).on('load', () => {
 
 })
 
+function getLoginState() {
+    let loginspan = loginstate.find('span').eq(0);
+    //发送请求拿到登录状态
+    $.ajax({
+        url: 'UserLoginCheckServlet',
+        method: 'POST',
+        dataType: 'json',
+        success: (data) => {
+            userdata = data;
+            if (userdata === null) {
+                loginOutDeal();
+                loginstate.data('login-state', 'login-in');
+            } else if (userdata.username !== undefined) {
+                loginInDeal(loginspan);
+                loginstate.data('login-state', 'login-out');
+            }
+        },
+        error: (jqXHR) => {
+            console.log("登录请求错误:", jqXHR.status, jqXHR.statusText);
+        }
+    });
+}
+
 function loginInDeal() {
     let span = loginstate.find('span').eq(0)
     loginstate.data('login-state', 'login-out');
@@ -155,6 +158,7 @@ function loginOutDeal() {
     let headimg = span.next('span');
     headimg.animate({opacity: 0}, 300, "swing", () => headimg.hide());
     current_innerpage = 'login-in';
+    userdata = null;
     index.click();
 }
 

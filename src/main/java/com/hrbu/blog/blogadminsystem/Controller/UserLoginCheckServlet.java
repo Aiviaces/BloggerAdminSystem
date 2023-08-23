@@ -17,6 +17,6 @@ public class UserLoginCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        WebResponsUtil.sendJsonResponse(response, WebRequestUtil.getRequestSessionAttr(request, "user"));
+        WebResponsUtil.sendJsonResponse(response, WebRequestUtil.getRequestSessionAttr(request, "user", true));
     }
 }

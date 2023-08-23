@@ -40,7 +40,7 @@
                 </div>
             </div>
             <label id="loginbtn">
-                <a onclick="login()" style="color: white">登录</a>
+                <a onclick="login()">登录</a>
             </label>
         </div>
     </div>

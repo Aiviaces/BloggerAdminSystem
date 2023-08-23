@@ -25,7 +25,7 @@ public class ServletListener implements ServletContextListener {
         ServletContextListener.super.contextInitialized(sce);
         ServletContext servletContext = sce.getServletContext();
         ServletInitializationUtils.initializeUserNum(servletContext);
-        ServletInitializationUtils.initializePermissionGroupNum(servletContext);
+        ServletInitializationUtils.initializePermissionGroup(servletContext);
     }
 
     /**

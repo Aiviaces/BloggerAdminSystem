@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PermissionGroup {
 
     @JsonProperty("uid")
-    private int uid;
+    private String uid;
     @JsonProperty("name")
     private String name;
     @JsonProperty("p_login")
@@ -26,7 +26,7 @@ public class PermissionGroup {
     /**
      * 权限组id 后台代码生成
      */
-    private void setUid(byte uid) {
+    private void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -90,63 +90,63 @@ public class PermissionGroup {
     /**
      * 权限组id 后台代码生成
      */
-    private int getUid() {
+    public String getUid() {
         return this.uid;
     }
 
     /**
      * 权限组名称
      */
-    private String getName() {
+    public String getName() {
         return this.name;
     }
 
     /**
      * 登录页权限
      */
-    private byte getPLogin() {
+    public byte getPLogin() {
         return this.p_login;
     }
 
     /**
      * 权限组操作页权限
      */
-    private byte getPAdminPgroupOperate() {
+    public byte getPAdminPgroupOperate() {
         return this.p_admin_pgroup_operate;
     }
 
     /**
      * 主页权限
      */
-    private byte getPIndex() {
+    public byte getPIndex() {
         return this.p_index;
     }
 
     /**
      * 用户操作页权限
      */
-    private byte getPAdminUserOperate() {
+    public byte getPAdminUserOperate() {
         return this.p_admin_user_operate;
     }
 
     /**
      * 文章页操作权限
      */
-    private byte getPAdminPostOperate() {
+    public byte getPAdminPostOperate() {
         return this.p_admin_post_operate;
     }
 
     /**
      * 添加文章页权限
      */
-    private byte getPAdminPostAdd() {
+    public byte getPAdminPostAdd() {
         return this.p_admin_post_add;
     }
 
     /**
      * 审核文章页权限
      */
-    private byte getPAdminPostReview() {
+    public byte getPAdminPostReview() {
         return this.p_admin_post_review;
     }
 
