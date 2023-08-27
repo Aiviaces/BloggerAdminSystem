@@ -15,7 +15,7 @@ function initCkeditor(textarea_id) {
     let exist = $(document).find(`#${textarea_id}`).length;
     if (!exist) return;
     let cnf = {
-        height: getCssRootVarValue('innerbox-div-heidth')
+        height: 300
     }
     console.log(cnf)
     ckeditor = CKEDITOR.replace(textarea_id, cnf);

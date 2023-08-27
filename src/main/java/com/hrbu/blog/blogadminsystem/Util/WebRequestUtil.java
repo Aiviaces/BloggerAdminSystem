@@ -46,7 +46,7 @@ public class WebRequestUtil {
      * 目前已记录属性:
      * 1. user 用户对象
      * 2. user-pgroup-map 用户权限组map对象
-     * 3. msg 返回前台的消息
+     * 3. msg 返回前台的消息(需确保msg类型的强制转化是正确的,更优的更自动的代码暂且不写了)
      * 4. userNum 用户数量
      * 5. permissionGroupNum 用户组数量
      *

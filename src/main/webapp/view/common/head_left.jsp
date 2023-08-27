@@ -43,14 +43,17 @@
                     用户操作
                     <%-- 用户的增删改查都可以放一起,分页查询之后我会修改查询的sql,表单只需记得传页数 --%>
                 </li>
-                <li data-op="pgroup_operate">
-                    权限组操作
-                </li>
+                    <li data-op="pgroup_operate">
+                        权限组操作
+                    </li>
             </ul>
         </ul>
     </div>
     <nav id="nav" class="nav">
         <div id="menu_button" class="menu_button">Menu</div>
+        <div id="msg_box" class="bleak">
+            <div></div>
+        </div>
     </nav>
 </div>
 

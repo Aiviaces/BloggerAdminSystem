@@ -7,6 +7,9 @@ let admin_operate_list = $("#admin_oprate > ul > li[data-op]"); // <--拿到所�
 let innerpage = $('#inner_page');  // <--内部页外层
 let index = $('#index'); // <--内部欢迎页
 let loginstate = $('#login_state'); // <--登录选项
+let msgbox = $('#msg_box');
+let msgbox_text = $('#msg_box div:first-child'); // <--消息盒子
+let msgicon = $('#msg_box div:first-child::before');
 
 //获取选择器
 
@@ -40,8 +43,12 @@ $(window).on('load', () => {
                     current_innerpage = 'index';
                     if (userdata != null) {
                         $('.inner_index span:first-child').text(`欢迎使用本系统${',' + userdata['nick']}`);
+                    } else {
+                        let inps = $('#loginbox div div:nth-child(2)');
+                        console.log(inps.html())
+                        /* 初始清空输入框 */
                     }
-                    fadeInElem(innerpage);
+                    fadeInElem(innerpage, true,);
                     center(false);
                 });
             }
@@ -90,7 +97,9 @@ $(window).on('load', () => {
     /* 用户管理 */
     clickElem = $('#user_admin');
     loadPage(clickElem, 'user_operate', 'admin_user_operate.jsp', () => loadUserSearchTable());
-    loadPage(clickElem, 'pgroup_operate', 'admin_pgroup_operate.jsp', () => loadPgroupSearchTable());
+    loadPage(clickElem, 'pgroup_operate', 'admin_pgroup_operate.jsp', () => {
+        loadPgroupSearchTable();
+    });
 
     //对每个li的下一个ul收放
     admin_operate.each(function () {
@@ -133,6 +142,7 @@ function getLoginState() {
                 loginInDeal(loginspan);
                 loginstate.data('login-state', 'login-out');
             }
+            getBackgroundMessage();
         },
         error: (jqXHR) => {
             console.log("登录请求错误:", jqXHR.status, jqXHR.statusText);
@@ -162,12 +172,14 @@ function loginOutDeal() {
     index.click();
 }
 
+let last_list_elem;
 function loadPage(clickElem, op, pageurl, callback) {
     //clickElem是点击目标jquery对象,op是操作名,pageurl是跳转页url
     let dataop = `[data-op=${op}]`;
     let url = `view/${pageurl}`;
-    clickElem.click(() => {
-        admin_operate_list.filter(dataop).click(() => {
+    clickElem.click(function () {
+        let target_elem = admin_operate_list.filter(dataop);
+        target_elem.click(function () {
             if (click_lock) {
                 if (current_innerpage !== op) {
                     click_lock = false;
@@ -182,8 +194,15 @@ function loadPage(clickElem, op, pageurl, callback) {
 
                             if (typeof callback == 'function') callback();
                             current_innerpage = op;
+                            if (last_list_elem !== undefined) {
+                                last_list_elem.css({color: target_elem.css('color')});
+                            }
+                            last_list_elem = target_elem;
+                            target_elem.css({color: '#bbbbbb'});
+
                             // 确保内容加载完毕后执行居中和淡入
                             // 这里可以添加一些条件判断，确保内容完全加载
+                            getBackgroundMessage(); // <--拿到后台消息
                             center(false);
                         },
                         error: function () {
@@ -228,6 +247,91 @@ function closeMenu(callback) {
     if (typeof callback === 'function') callback();
 }
 
+function fadeInMsg(speed, callback) {
+    let cb = () => {
+        if (typeof callback === "function") callback();
+    }
+    msgbox_text.show(() => {
+        msgbox_text.animate({opacity: 1}, speed, 'swing', () => cb());
+    });
+
+}
+
+function fadeOutMsg(speed, callback, hide = true) {
+    let cb = () => {
+        if (typeof callback === "function") callback();
+    }
+    msgbox_text.animate({opacity: 0}, speed, 'swing', () => {
+        cb();
+        if (typeof hide == "boolean" && hide === true) msgbox_text.hide();
+    });
+
+}
+
+let timer_msgbox;
+
+function fadeShowMsg(speed, fadeInTime, fadeOutTime, callback) {
+    clearTimeout(timer_msgbox);
+    fadeInMsg(fadeInTime, () => {
+        timer_msgbox = setTimeout(() => {
+            fadeOutMsg(fadeOutTime, () => {
+                if (typeof callback === "function") callback();
+            });
+        }, speed);
+    });
+}
+
+/* 动画效果写在css */
+function ShowMsg(speed, fadeInTime, fadeOutTime, callback) {
+    clearTimeout(timer_msgbox);
+    fadeInMsg(0, () => {
+        timer_msgbox = setTimeout(() => {
+            fadeOutMsg(0, () => {
+                if (typeof callback === "function") callback();
+            }, false);
+        }, speed);
+    });
+}
+
+function slideShowMsg(speed, slideSpeed, callback) {
+    clearTimeout(timer_msgbox);
+    msgbox.removeClass('bleak').addClass('luminous-white');
+    msgbox_text.animate({
+        width: '100%',
+        opacity: 1,
+    }, slideSpeed, 'linear', () => {
+        timer_msgbox = setTimeout(() => {
+            msgbox.removeClass('luminous-white').addClass('bleak');
+            msgbox_text.animate({width: 0, opacity: 0}, slideSpeed, 'linear', () => {
+                if (typeof callback === "function") {
+                    callback();
+                }
+            });
+        }, speed);
+    })
+}
+
+function getBackgroundMessage() {
+    $.ajax({
+        url: 'MessageServelt',
+        dataType: 'text',
+        method: 'POST',
+        success: (msg) => {
+            if (msg && msg !== '') {
+                msgbox_text.text(msg);
+                slideShowMsg(1000, 200, () => {
+                    console.log('Got Message.', msg);
+                    msgbox_text.text('');
+                });
+            }
+        },
+        error: (jqXHR) => {
+            console.log("后台消息请求错误:", jqXHR.status, jqXHR.statusText);
+        }
+    });
+}
+
+
 //弹性居中
 /*
 如果添加了参数(true,false)
@@ -265,6 +369,19 @@ function getCssRootVarValue(varname, referToWindow = true) {
     // 百分比, 秒 获取浮点值
     // referToWindow 指是否参考与窗口宽度按百分比返回像素值,为false时返回浮点百分比
     let val = $(':root').css('--' + varname);
+    return standardizedValues(val, referToWindow)
+}
+
+//获取css的变量
+function getCssVarValue(elem, cssAttr, referToWindow = true) {
+    let val = elem.css(cssAttr);
+    return standardizedValues(val, referToWindow);
+}
+
+function standardizedValues(val, referToWindow) {
+    // 像素, 毫秒 获取整形值
+    // 百分比, 秒 获取浮点值
+    // referToWindow 指是否参考与窗口宽度按百分比返回像素值,为false时返回浮点百分比
     if (val.includes('px')) return parseInt(val.slice(0, -2));
     else if (val.includes('vh')) return $(window).height() * parseFloat(val.slice(0, -2)) / 100;
     else if (val.includes('%')) return (parseFloat(val.slice(0, -1)) / 100) * (referToWindow ? $(window).width() : 1);

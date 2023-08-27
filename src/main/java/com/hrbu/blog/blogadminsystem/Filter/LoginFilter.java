@@ -39,6 +39,7 @@ public class LoginFilter implements Filter {
             if (!islogin) {
                 //未登录跳转到登录
                 wrapper = new UrlRewriterRequestWrapper(req, "/view/login.jsp");
+                WebRequestUtil.setRequestSessionAttr(req, "msg", "抱歉,您尚未登录", false);
                 chain.doFilter(wrapper, response);
             } else {
                 //登录则判断是否有权限
@@ -48,19 +49,36 @@ public class LoginFilter implements Filter {
                 String pagename = UrlUtil.getPageName(url);
                 //这里不能是uid,或者name
                 System.out.println("pagename: " + pagename);
+
+                //这是后台消息字符串
+                String msg;
                 //少个无关紧要的字段,临时修补这里
-                if ("welcome_admin".equals(pagename)) pagename = "index";
+                if ("welcome_admin".equals(pagename)) {
+                    pagename = "index";
+                    msg = "登录成功";
+                } else {
+                    msg = "权限验证通过";
+                }
                 Object allow = user_pgroup_map.get(pagename); //是否有权限
-                if (allow == null) allow = false;
-                System.out.println("allow: " + allow);
+                if (allow == null) {
+                    allow = false;
+                }
+                //屎山代码是如何对堆砌的: 忘了自己写了些啥
+
                 if ((boolean) allow) {
                     chain.doFilter(request, response);
+                    WebRequestUtil.setRequestSessionAttr(req, "msg", msg, false);
                 } else {
+                    msg = "抱歉,您的权限不足,已跳转至主页";
                     wrapper = new UrlRewriterRequestWrapper(req, "/view/welcome_admin.jsp");
-                    WebRequestUtil.setRequestSessionAttr(req, "msg", "抱歉,您的权限不足", false);
+                    WebRequestUtil.setRequestSessionAttr(req, "msg", msg, false);
                     chain.doFilter(wrapper, response);
                 }
             }
-        } else chain.doFilter(request, response);
+        } else {
+            //直接跳转登录页就是这个
+            WebRequestUtil.setRequestSessionAttr(req, "msg", "请登录您的账号", false);
+            chain.doFilter(request, response);
+        }
     }
 }

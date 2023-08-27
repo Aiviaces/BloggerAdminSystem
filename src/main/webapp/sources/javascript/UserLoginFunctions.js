@@ -5,8 +5,10 @@ function login() {
         url: 'UserLoginServlet',
         data: {},
         success: () => {
+            //这里还没有做登录判断结果的返回
             getLoginState();
             loginInDeal(loginstate.find('span').eq(0));
+            getBackgroundMessage();
         },
         error: (jqXHR) => {
             console.log("登录状态请求错误:", jqXHR.status, jqXHR.statusText);
@@ -16,9 +18,6 @@ function login() {
 
 
 $(document).ready(() => {
-    let inps = $('#loginbox div div:nth-child(2) input');
-    inps.val('');
-    /* 初始清空输入框 */
     // console.log(inps.html())
     /* 动画效果:聚焦进入输入状态打开验证码,离开时收起 */
     let captcha = $('#captcha div:first-child');

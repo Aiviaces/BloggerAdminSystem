@@ -24,3 +24,11 @@
 div {
     box-sizing: border-box;
 }
+
+.luminous-white {
+    filter: brightness(1) drop-shadow(0 0 2px white);
+}
+
+.bleak {
+    filter: brightness(0.5);
+}
